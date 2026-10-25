@@ -1,7 +1,7 @@
-﻿import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+﻿import { CategorySection, FeaturedProducts } from "@/components/home/CatalogSections";
 import Hero from "@/components/home/Hero";
-import { CategorySection, FeaturedProducts } from "@/components/home/CatalogSections";
+import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   return (
