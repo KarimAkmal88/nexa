@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Star } from "lucide-react";
 import type { ProductI } from "@/interfaces/product";
 
-export default function ProductCard({ product, currency }: { product: ProductI; currency?: string }) {
+export default function ProductCard({ product, currency = "EGP" }: { product: ProductI; currency?: string }) {
   const discounted = product.priceAfterDiscount != null && product.priceAfterDiscount < product.price;
   return (
     <article className="overflow-hidden rounded-2xl border bg-card">

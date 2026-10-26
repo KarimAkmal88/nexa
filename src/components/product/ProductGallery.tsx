@@ -37,14 +37,14 @@ export default function ProductGallery({ title, imageCover, images }: ProductGal
                 }
             </div>
             {galleryImages.length > 1 && (
-                <div className="flex gap-2.5 overflow-x-auto p-1" aria-label="Choose a product image">
+                 <div className="flex gap-2.5 overflow-x-auto overscroll-x-contain scroll-px-1 p-1 pb-3 [scrollbar-color:var(--primary)_var(--secondary)] [scrollbar-width:thin] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-primary [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-secondary" aria-label="Choose a product image">
                     {galleryImages.map((src, index) => (
-                        <button key={src} type="button" aria-label={`Show ${title}, view ${index + 1}`} onClick={() => setSelectedIndex(index)} 
-                        className={`relative size-20 shrink-0 overflow-hidden rounded-xl border bg-primary-foreground transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-foreground sm:size-24 ${selectedIndex === index ? 'border-primary ring-2 ring-primary' : 'border-border hover:border-foreground/40'}`} >
+                        <button key={src} type="button" aria-label={`Show ${title}, view ${index + 1}`} aria-pressed={selectedIndex === index} onClick={() => setSelectedIndex(index)} 
+                        className={`relative size-20 shrink-0 overflow-hidden rounded-xl border bg-primary-foreground transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:size-24 ${selectedIndex === index ? 'border-primary ring-1 ring-primary/30' : 'border-border hover:border-primary/40'}`} >
                         {failedImages.includes(src) ? (
-                            <ImageOff aria-hidden='true' className="mx-auto size-5 text-primary-foreground"/>
+                            <ImageOff aria-hidden='true' className="mx-auto size-5 text-primary"/>
                         ) : (
-                            <Image src={src} alt="" fill unoptimized sizes="96px" className="object-contain p-1.5"
+                            <Image src={src} alt="" fill unoptimized sizes="96px" className="object-contain p-0.5"
                             onError={() => setFailedImages((previous) => [...previous, src])}
                             />
                         )}
