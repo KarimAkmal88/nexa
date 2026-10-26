@@ -16,7 +16,7 @@ export default  function Footer() {
           </nav>
         </div>
         <div className="mt-10 flex flex-col justify-between gap-3 border-t border-primary-foreground/20 pt-6 text-xs text-primary-foreground/70 sm:flex-row">
-          <p>© {new Date().getFullYear()} Nexa. All rights reserved.</p>
+          <p>© 2026 Nexa. All rights reserved.</p>
           <p className="tracking-widest">DISCOVER MORE. SHOP BETTER.</p>
         </div>
       </div>
