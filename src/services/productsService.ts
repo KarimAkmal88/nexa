@@ -2,9 +2,12 @@ import { ProductDetailsResponse, ProductsResponse } from "@/types/response";
 
 
 class ProductsApiServices {
-    async getProducts(page: number = 1): Promise<ProductsResponse> {
+    async getProducts(page: number = 1, filters: { brand?: string; subcategory?: string } = {}): Promise<ProductsResponse> {
         try {
-            const response = await fetch(`${process.env.API_BASE_URL}/api/v1/products?page=${page}`);
+            const query = new URLSearchParams({ page: String(page) });
+            if (filters.brand) query.set("brand", filters.brand);
+            if (filters.subcategory) query.set("subcategory", filters.subcategory);
+            const response = await fetch(`${process.env.API_BASE_URL}/api/v1/products?${query}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }

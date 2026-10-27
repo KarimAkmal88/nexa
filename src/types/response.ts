@@ -1,4 +1,5 @@
 import { ProductI } from "@/interfaces/product";
+import { BrandI } from "@/interfaces/brand";
 
 type ResponseT<T> = {
     results: number;
@@ -14,4 +15,6 @@ type ResponseT<T> = {
 
 
 export type ProductsResponse = ResponseT<ProductI>
+export type BrandsResponse = ResponseT<BrandI>
+export type BrandDetailsResponse = { data: BrandI }
 export type ProductDetailsResponse = { data: ProductI } 
