@@ -1,5 +1,5 @@
 import BrandsPagination from "@/components/brand/BrandsPagination";
-import ProductCard from "@/components/product/ProductCard";
+import ProductGrid from "@/components/product/ProductGrid";
 import brandsApiServices from "@/services/brandsService";
 import productsApiServices from "@/services/productsService";
 import Image from "next/image";
@@ -27,9 +27,7 @@ export default async function BrandDetails({ params, searchParams }: {
             </header>
             <h2 className="mb-5 text-xl font-semibold">Products</h2>
             {products.length > 0 ? (
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-                    {products.map((product) => <ProductCard key={product._id} product={product} />)}
-                </div>
+                <ProductGrid products={products} />
             ) : <p className="rounded-2xl border bg-card p-8 text-center text-muted-foreground">No products available for {brand.name} yet.</p>}
             <BrandsPagination currentPage={page} totalPages={metadata.numberOfPages} basePath={`/brands/${encodeURIComponent(brandId)}`} />
         </main>
