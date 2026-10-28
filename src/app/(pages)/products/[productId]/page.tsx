@@ -11,16 +11,18 @@ export default async function ProductDetails({ params }: ProductDetailsProps) {
 
     const resolvedParams = await params;
     const productId = resolvedParams.productId;
-    const { data: productDetails } = await productsApiServices.getProductDetails(productId);
-    if (!productDetails) {
+    if (!/^[a-f\d]{24}$/i.test(productId)) notFound();
+    const response = await productsApiServices.getProductDetails(productId);
+    if (response === null) {
         notFound();
     }
+    const productDetails = response.data;
 
     const inStock = productDetails.quantity > 0;
     const discounted = productDetails.priceAfterDiscount != null && productDetails.priceAfterDiscount < productDetails.price;
 
     return (
-        <main className="max-w-7xl mx-auto p-4 mt-3 mb-3">
+        <main className="max-w-7xl mx-auto p-4 mt-3 mb-3 w-full">
             <nav
                 aria-label="Breadcrumb"
                 className="mb-8 flex flex-wrap items-center gap-2 text-sm text-muted-foreground"
@@ -34,7 +36,7 @@ export default async function ProductDetails({ params }: ProductDetailsProps) {
                 <ChevronRight aria-hidden="true" className="size-3.5" />
                 <span>{productDetails.category.name}</span>
                 <ChevronRight aria-hidden="true" className="size-3.5" />
-                <span aria-current="page" className="min-w-0 truncate text-foreground">
+                <span aria-current="page" className="min-w-0 line-clamp-3 text-foreground lg:truncate">
                     {productDetails.title}
                 </span>
             </nav>

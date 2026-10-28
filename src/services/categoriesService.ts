@@ -18,8 +18,6 @@ class CategoriesApiServices {
     async getSubcategories(categoryId: string): Promise<SubcategoryI[]> {
         const subcategories: SubcategoryI[] = [];
         let numberOfPages = 1;
-        // This endpoint returns an unfiltered collection. Read every page before filtering.
-        // Explicit page and limit parameters returned consistent pagination in API probes.
         for (let page = 1; page <= numberOfPages; page++) {
             const response = await fetch(`${process.env.API_BASE_URL}/api/v1/categories/${encodeURIComponent(categoryId)}/subcategories?page=${page}&limit=40`);
             if (!response.ok) throw new Error(`Failed to fetch subcategories: ${response.status}`);
