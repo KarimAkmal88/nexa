@@ -29,7 +29,8 @@ export default async function Products({ searchParams }: ProductsProps) {
     }
 
     return (
-        <div className="max-w-7xl mx-auto pt-4 pb-4">
+        <main className="max-w-7xl mx-auto pt-4 pb-4">
+            {products.length > 0 && <h1 className="sr-only">Products</h1>}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {products.length > 0 ? products.map((product) => (
                     <ProductCard product={product} key={product._id} />
@@ -48,6 +49,6 @@ export default async function Products({ searchParams }: ProductsProps) {
                 <ProductPagination currentPage={parsedPage} totalPages={metadata.numberOfPages} basePath="/products" />
             )}
             </div>
-        </div>
+        </main>
     )
 }
