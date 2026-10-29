@@ -11,16 +11,18 @@ export default async function ProductDetails({ params }: ProductDetailsProps) {
 
     const resolvedParams = await params;
     const productId = resolvedParams.productId;
-    const { data: productDetails } = await productsApiServices.getProductDetails(productId);
-    if (!productDetails) {
+    if (!/^[a-f\d]{24}$/i.test(productId)) notFound();
+    const response = await productsApiServices.getProductDetails(productId);
+    if (response === null) {
         notFound();
     }
+    const productDetails = response.data;
 
     const inStock = productDetails.quantity > 0;
     const discounted = productDetails.priceAfterDiscount != null && productDetails.priceAfterDiscount < productDetails.price;
 
     return (
-        <main className="max-w-7xl mx-auto p-4 mt-3 mb-3">
+        <main className="max-w-7xl mx-auto p-4 mt-3 mb-3 w-full">
             <nav
                 aria-label="Breadcrumb"
                 className="mb-8 flex flex-wrap items-center gap-2 text-sm text-muted-foreground"
@@ -34,7 +36,7 @@ export default async function ProductDetails({ params }: ProductDetailsProps) {
                 <ChevronRight aria-hidden="true" className="size-3.5" />
                 <span>{productDetails.category.name}</span>
                 <ChevronRight aria-hidden="true" className="size-3.5" />
-                <span aria-current="page" className="min-w-0 truncate text-foreground">
+                <span aria-current="page" className="min-w-0 line-clamp-3 text-foreground lg:truncate">
                     {productDetails.title}
                 </span>
             </nav>
@@ -56,9 +58,9 @@ export default async function ProductDetails({ params }: ProductDetailsProps) {
                             By {productDetails.brand.name}
                         </span>
                     </div>
-                    <h2 id="product-title" className="text-3xl font-semibold leading-tight tracking-tight sm:text-3xl lg:text-5xl">
+                    <h1 id="product-title" className="text-3xl font-semibold leading-tight tracking-tight sm:text-3xl lg:text-5xl">
                         {productDetails.title}
-                    </h2>
+                    </h1>
                     <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-sm">
                         {productDetails.ratingsQuantity > 0 ? (
                             <>
@@ -107,12 +109,12 @@ export default async function ProductDetails({ params }: ProductDetailsProps) {
                             )}
                         </div>
                     </div>
-                    <h3 className="text-lg font-semibold">About this product</h3>
+                    <h2 className="text-lg font-semibold">About this product</h2>
                     <p className="mt-2.5 whitespace-pre-line text-sm leading-7 text-muted-foreground">
                         {productDetails.description || 'No description available for this product.'}
                     </p>
                     <div className="mt-7 border-t pt-5">
-                        <h3 className="text-sm font-semibold">Product details</h3>
+                        <h2 className="text-sm font-semibold">Product details</h2>
                         <dl className="mt-3.5 divide-y text-sm">
                             {[
                                 ["Brand", productDetails.brand.name],
