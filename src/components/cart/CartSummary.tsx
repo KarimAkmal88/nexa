@@ -11,7 +11,7 @@ interface CartSummaryProps {
 }
 
 export default function CartSummary({ currency = "EGP" }: CartSummaryProps) {
-  const { totalCartPrice, numOfCartItems, cartId, clearCart, isMutating } = useCart();
+  const { totalCartPrice, numOfCartItems, clearCart, isMutating } = useCart();
   const [isClearing, setIsClearing] = useState(false);
 
   const handleClearCart = async () => {
@@ -56,7 +56,7 @@ export default function CartSummary({ currency = "EGP" }: CartSummaryProps) {
 
       <div className="space-y-3 pt-2">
         <Link
-          href={cartId ? `/checkout/${encodeURIComponent(cartId)}` : "/checkout"}
+          href="/checkout"
           className="flex w-full min-h-12 items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-xs hover:bg-primary/90 transition-colors"
         >
           <span>Proceed to Checkout</span>

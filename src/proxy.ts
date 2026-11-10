@@ -10,8 +10,8 @@ export async function proxy(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
 
-  // Protect /change-password route
-  if (pathname.startsWith("/change-password")) {
+  // Protect /change-password and /checkout routes
+  if (pathname.startsWith("/change-password") || pathname.startsWith("/checkout")) {
     if (!token) {
       const loginUrl = new URL("/login", request.url);
       loginUrl.searchParams.set("callbackUrl", pathname);
@@ -38,6 +38,7 @@ export default proxy;
 export const config = {
   matcher: [
     "/change-password",
+    "/checkout",
     "/login",
     "/register",
     "/forgot-password",
