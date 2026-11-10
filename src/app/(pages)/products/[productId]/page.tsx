@@ -1,4 +1,5 @@
 import ProductGallery from "@/components/product/ProductGallery";
+import AddToCartBtn from "@/components/product/AddToCartBtn";
 import productsApiServices from "@/services/productsService";
 import { ArrowLeft, ChevronRight, Star } from "lucide-react";
 import Link from "next/link";
@@ -139,7 +140,11 @@ export default async function ProductDetails({ params }: ProductDetailsProps) {
                         </dl>
                     </div>
                     <div className="mt-7">
-                        {/* add to cart button */}
+                        <AddToCartBtn
+                            productId={productDetails._id}
+                            className="w-full max-w-md rounded-full py-3 text-base font-semibold shadow-xs"
+                            size="lg"
+                        />
                     </div>
                     <Link href='/products' className="mt-7 inline-flex items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted focus-visible:outline-2">
                         <ArrowLeft aria-hidden='true' className="size-4" />

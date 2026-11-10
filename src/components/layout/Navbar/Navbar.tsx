@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { Menu, ShoppingBag, X, User, LogOut, KeyRound, ChevronDown } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
 
 const links = [
   ["/", "Home"],
@@ -35,6 +36,7 @@ function Navigation({ pathname }: { pathname: string }) {
   const userButtonRef = useRef<HTMLButtonElement>(null);
 
   const { data: session, status } = useSession();
+  const { numOfCartItems } = useCart();
 
   const active = (href: string) =>
     href === "/" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
@@ -120,7 +122,11 @@ function Navigation({ pathname }: { pathname: string }) {
         <div className="flex items-center gap-2 sm:gap-3">
           <Link
             href="/cart"
-            aria-label="Cart"
+            aria-label={
+              status === "authenticated" && numOfCartItems > 0
+                ? `Cart, ${numOfCartItems} ${numOfCartItems === 1 ? "item" : "items"}`
+                : "Cart"
+            }
             aria-current={active("/cart") ? "page" : undefined}
             onClick={() => {
               setMobileOpen(false);
@@ -130,7 +136,17 @@ function Navigation({ pathname }: { pathname: string }) {
               active("/cart") ? "bg-secondary" : ""
             }`}
           >
-            <ShoppingBag size={19} aria-hidden="true" />
+            <div className="relative flex items-center">
+              <ShoppingBag size={19} aria-hidden="true" />
+              {status === "authenticated" && numOfCartItems > 0 && (
+                <span
+                  aria-hidden="true"
+                  className="absolute -top-1.5 -right-2 flex size-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground leading-none"
+                >
+                  {numOfCartItems > 99 ? "99+" : numOfCartItems}
+                </span>
+              )}
+            </div>
             <span className="hidden sm:inline">Cart</span>
           </Link>
 
