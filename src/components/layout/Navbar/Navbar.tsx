@@ -5,8 +5,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { useSession, signOut } from "next-auth/react";
-import { Menu, ShoppingBag, X, User, LogOut, KeyRound, ChevronDown } from "lucide-react";
+import { Menu, ShoppingBag, X, User, LogOut, KeyRound, ChevronDown, Heart } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
+import { useWishlist } from "@/contexts/WishlistContext";
 
 const links = [
   ["/", "Home"],
@@ -37,6 +38,7 @@ function Navigation({ pathname }: { pathname: string }) {
 
   const { data: session, status } = useSession();
   const { numOfCartItems } = useCart();
+  const { wishlistCount } = useWishlist();
 
   const active = (href: string) =>
     href === "/" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
@@ -120,6 +122,44 @@ function Navigation({ pathname }: { pathname: string }) {
 
         {/* Right Action Icons & Auth Controls */}
         <div className="flex items-center gap-2 sm:gap-3">
+          <Link
+            href="/wishlist"
+            aria-label={
+              status === "authenticated" && wishlistCount > 0
+                ? `Wishlist, ${wishlistCount} ${wishlistCount === 1 ? "item" : "items"}`
+                : "Wishlist"
+            }
+            aria-current={active("/wishlist") ? "page" : undefined}
+            onClick={() => {
+              setMobileOpen(false);
+              setUserMenuOpen(false);
+            }}
+            className={`flex min-h-10 items-center gap-2 rounded-full px-3 text-sm font-medium hover:bg-secondary ${
+              active("/wishlist") ? "bg-secondary" : ""
+            }`}
+          >
+            <div className="relative flex items-center">
+              <Heart
+                size={19}
+                aria-hidden="true"
+                className={
+                  status === "authenticated" && wishlistCount > 0
+                    ? "fill-rose-500 text-rose-500"
+                    : ""
+                }
+              />
+              {status === "authenticated" && wishlistCount > 0 && (
+                <span
+                  aria-hidden="true"
+                  className="absolute -top-1.5 -right-2 flex size-4 items-center justify-center rounded-full bg-rose-600 px-1 text-[10px] font-bold text-white leading-none"
+                >
+                  {wishlistCount > 99 ? "99+" : wishlistCount}
+                </span>
+              )}
+            </div>
+            <span className="hidden sm:inline">Wishlist</span>
+          </Link>
+
           <Link
             href="/cart"
             aria-label={
@@ -262,6 +302,32 @@ function Navigation({ pathname }: { pathname: string }) {
               {label}
             </Link>
           ))}
+          <Link
+            href="/wishlist"
+            aria-current={active("/wishlist") ? "page" : undefined}
+            onClick={() => setMobileOpen(false)}
+            className={`flex items-center justify-between rounded-lg px-4 py-2.5 text-sm font-medium hover:bg-secondary ${
+              active("/wishlist") ? "bg-secondary text-primary" : ""
+            }`}
+          >
+            <div className="flex items-center gap-2.5">
+              <Heart
+                size={18}
+                aria-hidden="true"
+                className={
+                  status === "authenticated" && wishlistCount > 0
+                    ? "fill-rose-500 text-rose-500"
+                    : "text-neutral-500"
+                }
+              />
+              <span>Wishlist</span>
+            </div>
+            {status === "authenticated" && wishlistCount > 0 && (
+              <span className="rounded-full bg-rose-100 px-2 py-0.5 text-xs font-semibold text-rose-600">
+                {wishlistCount}
+              </span>
+            )}
+          </Link>
         </div>
 
         {/* Mobile Auth Links */}

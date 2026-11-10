@@ -3,11 +3,19 @@ import { Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import AddToCartBtn from "@/components/product/AddToCartBtn";
+import WishlistToggleBtn from "@/components/wishlist/WishlistToggleBtn";
 
 export default function ProductCard({ product, currency = "EGP" }: { product: ProductI; currency?: string }) {
   const discounted = product.priceAfterDiscount != null && product.priceAfterDiscount < product.price;
   return (
-    <article className="flex flex-col justify-between overflow-hidden rounded-2xl border bg-card h-full transition-shadow hover:shadow-xs">
+    <article className="relative flex flex-col justify-between overflow-hidden rounded-2xl border bg-card h-full transition-shadow hover:shadow-xs">
+      <div className="absolute top-2.5 right-2.5 z-10">
+        <WishlistToggleBtn
+          productId={product._id}
+          productTitle={product.title}
+          size="sm"
+        />
+      </div>
       <Link href={`/products/${encodeURIComponent(product._id)}`} className="group flex flex-col flex-1">
         <div className="relative aspect-square bg-muted">
           <Image

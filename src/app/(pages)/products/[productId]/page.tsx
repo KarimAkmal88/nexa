@@ -1,5 +1,6 @@
 import ProductGallery from "@/components/product/ProductGallery";
 import AddToCartBtn from "@/components/product/AddToCartBtn";
+import WishlistToggleBtn from "@/components/wishlist/WishlistToggleBtn";
 import productsApiServices from "@/services/productsService";
 import { ArrowLeft, ChevronRight, Star } from "lucide-react";
 import Link from "next/link";
@@ -139,10 +140,16 @@ export default async function ProductDetails({ params }: ProductDetailsProps) {
                                 ))}
                         </dl>
                     </div>
-                    <div className="mt-7">
+                    <div className="mt-7 flex flex-wrap items-center gap-3">
                         <AddToCartBtn
                             productId={productDetails._id}
-                            className="w-full max-w-md rounded-full py-3 text-base font-semibold shadow-xs"
+                            className="flex-1 max-w-xs rounded-full py-3 text-base font-semibold shadow-xs"
+                            size="lg"
+                        />
+                        <WishlistToggleBtn
+                            productId={productDetails._id}
+                            productTitle={productDetails.title}
+                            variant="button"
                             size="lg"
                         />
                     </div>
