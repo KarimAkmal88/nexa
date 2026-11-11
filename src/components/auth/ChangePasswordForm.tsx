@@ -10,7 +10,7 @@ import {
   changePasswordSchema,
   type ChangePasswordFormData,
 } from "@/lib/validations/auth";
-import { changeUserPassword } from "@/services/auth.service";
+import { changeUserPassword } from "@/services/authService";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 

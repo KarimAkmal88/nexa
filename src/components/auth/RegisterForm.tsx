@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Eye, EyeOff, Loader2, CheckCircle2 } from "lucide-react";
 import { registerSchema, type RegisterFormData } from "@/lib/validations/auth";
-import { registerUser } from "@/services/auth.service";
+import { registerUser } from "@/services/authService";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 

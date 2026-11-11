@@ -1,41 +1,30 @@
-import { ProductDetailsResponse, ProductsResponse } from "@/types/response";
+import type { ProductDetailsResponse, ProductsResponse } from "@/types/response";
 
+export async function getProducts(
+  page: number = 1,
+  filters: { brand?: string; subcategory?: string; category?: string } = {}
+): Promise<ProductsResponse> {
+  const query = new URLSearchParams({ page: String(page) });
+  if (filters.brand) query.set("brand", filters.brand);
+  if (filters.subcategory) query.set("subcategory", filters.subcategory);
+  if (filters.category) query.set("category[in]", filters.category);
 
-class ProductsApiServices {
-    async getProducts(page: number = 1, filters: { brand?: string; subcategory?: string; category?: string } = {}): Promise<ProductsResponse> {
-        try {
-            const query = new URLSearchParams({ page: String(page) });
-            if (filters.brand) query.set("brand", filters.brand);
-            if (filters.subcategory) query.set("subcategory", filters.subcategory);
-            if (filters.category) query.set("category[in]", filters.category);
-            const response = await fetch(`${process.env.API_BASE_URL}/api/v1/products?${query}`);
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.error("Failed to fetch products:", error);
-            throw error;
-        }
-    }
-
-    async getProductDetails(productId: string): Promise<ProductDetailsResponse | null> {
-        try {
-            const response = await fetch(`${process.env.API_BASE_URL}/api/v1/products/${encodeURIComponent(productId)}`);
-            if (response.status === 404) return null;
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            const data = await response.json();
-            return data
-        } catch (error) {
-            console.error("Failed to fetch product details", error);
-            throw error;
-        }
-    }
-
+  const response = await fetch(`${process.env.API_BASE_URL}/api/v1/products?${query}`);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch products: ${response.status}`);
+  }
+  return response.json();
 }
 
-const productsApiServices = new ProductsApiServices();
-export default productsApiServices;
+export async function getProductDetails(
+  productId: string
+): Promise<ProductDetailsResponse | null> {
+  const response = await fetch(
+    `${process.env.API_BASE_URL}/api/v1/products/${encodeURIComponent(productId)}`
+  );
+  if (response.status === 404) return null;
+  if (!response.ok) {
+    throw new Error(`Failed to fetch product details: ${response.status}`);
+  }
+  return response.json();
+}

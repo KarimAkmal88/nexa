@@ -29,7 +29,6 @@ export default function CheckoutSummary({
         </span>
       </div>
 
-      {/* Cart items preview */}
       <div className="max-h-72 overflow-y-auto divide-y divide-neutral-100 pr-1 space-y-3">
         {products.map((item) => {
           const product = item.product;
@@ -70,7 +69,6 @@ export default function CheckoutSummary({
         })}
       </div>
 
-      {/* Pricing breakdown */}
       <dl className="space-y-3 border-t border-neutral-200 pt-4 text-sm">
         <div className="flex items-center justify-between text-muted-foreground">
           <dt>Subtotal</dt>
@@ -92,7 +90,6 @@ export default function CheckoutSummary({
         </div>
       </dl>
 
-      {/* Trust & Guarantee badge */}
       <div className="flex items-center gap-2.5 rounded-xl bg-neutral-50 p-3 text-xs text-muted-foreground border border-neutral-200">
         <ShieldCheck className="size-5 text-emerald-600 shrink-0" aria-hidden="true" />
         <p>

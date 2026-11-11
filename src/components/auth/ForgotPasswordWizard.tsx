@@ -18,7 +18,7 @@ import {
   requestPasswordReset,
   verifyResetCode,
   resetPassword,
-} from "@/services/auth.service";
+} from "@/services/authService";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
@@ -33,10 +33,8 @@ export function ForgotPasswordWizard() {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
 
-  // Attempt tracker to invalidate late or obsolete responses across restarts
   const attemptRef = useRef(0);
 
-  // Step 1 Form: Email
   const emailForm = useForm<ForgotPasswordEmailFormData>({
     mode: "onBlur",
     reValidateMode: "onChange",
@@ -44,7 +42,6 @@ export function ForgotPasswordWizard() {
     defaultValues: { email: "" },
   });
 
-  // Step 2 Form: Reset Code
   const codeForm = useForm<VerifyResetCodeFormData>({
     mode: "onBlur",
     reValidateMode: "onChange",
@@ -52,7 +49,6 @@ export function ForgotPasswordWizard() {
     defaultValues: { resetCode: "" },
   });
 
-  // Step 3 Form: New Password
   const resetForm = useForm<ResetPasswordFormData>({
     mode: "onBlur",
     reValidateMode: "onChange",
@@ -60,7 +56,6 @@ export function ForgotPasswordWizard() {
     defaultValues: { email: "", newPassword: "" },
   });
 
-  // Handler for Step 1
   const handleRequestCode = async (data: ForgotPasswordEmailFormData) => {
     attemptRef.current += 1;
     const currentAttempt = attemptRef.current;
@@ -81,13 +76,11 @@ export function ForgotPasswordWizard() {
     setStep(2);
   };
 
-  // Handler for Step 2
   const handleVerifyCode = async (data: VerifyResetCodeFormData) => {
     const currentAttempt = attemptRef.current;
     setServerError(null);
     const res = await verifyResetCode(data.resetCode);
 
-    // Discard result if user restarted or started another attempt
     if (currentAttempt !== attemptRef.current) {
       return;
     }
@@ -97,7 +90,6 @@ export function ForgotPasswordWizard() {
       return;
     }
 
-    // Guard against missing email state
     if (!email) {
       handleRestart();
       return;
@@ -106,7 +98,6 @@ export function ForgotPasswordWizard() {
     setStep(3);
   };
 
-  // Handler for Step 3
   const handleResetPassword = async (data: ResetPasswordFormData) => {
     if (!email) {
       handleRestart();
@@ -192,7 +183,6 @@ export function ForgotPasswordWizard() {
         </div>
       )}
 
-      {/* STEP 1: EMAIL */}
       {step === 1 && (
         <form
           onSubmit={onEmailSubmit}
@@ -241,7 +231,6 @@ export function ForgotPasswordWizard() {
         </form>
       )}
 
-      {/* STEP 2: VERIFICATION CODE */}
       {step === 2 && (
         <form
           onSubmit={onCodeSubmit}
@@ -303,7 +292,6 @@ export function ForgotPasswordWizard() {
         </form>
       )}
 
-      {/* STEP 3: RESET PASSWORD */}
       {step === 3 && (
         <form
           onSubmit={onResetSubmit}

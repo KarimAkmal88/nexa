@@ -22,7 +22,6 @@ export default function CheckoutPage() {
   const { cart, numOfCartItems, cartId, isLoading } = useCart();
   const [placedOrder, setPlacedOrder] = useState<OrderData | null>(null);
 
-  // 1. Unauthenticated View
   if (status === "unauthenticated") {
     return (
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full flex-1 flex items-center justify-center">
@@ -48,7 +47,6 @@ export default function CheckoutPage() {
     );
   }
 
-  // 2. Loading State (Session or Cart loading)
   if (status === "loading" || (isLoading && !placedOrder)) {
     return (
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full flex-1 flex flex-col items-center justify-center">
@@ -60,7 +58,6 @@ export default function CheckoutPage() {
     );
   }
 
-  // 3. Cash Order Success Confirmation View
   if (placedOrder) {
     const orderRef = placedOrder._id || placedOrder.id;
     const orderTotal = placedOrder.totalOrderPrice ?? 0;
@@ -80,7 +77,6 @@ export default function CheckoutPage() {
             Thank you for shopping with Nexa. Your Cash on Delivery order has been registered and is being prepared for dispatch.
           </p>
 
-          {/* Order Details Summary Card */}
           <div className="mt-8 w-full max-w-lg rounded-2xl border border-neutral-200 bg-neutral-50/70 p-6 text-left space-y-4 text-sm">
             {orderRef && (
               <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
@@ -141,7 +137,6 @@ export default function CheckoutPage() {
     );
   }
 
-  // 4. Empty Cart View
   if (!cart || numOfCartItems === 0 || !cartId) {
     return (
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 w-full flex-1">
@@ -188,7 +183,6 @@ export default function CheckoutPage() {
 
   const token = session?.token || "";
 
-  // 5. Active Checkout Form View
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-1">
       <nav
@@ -218,7 +212,6 @@ export default function CheckoutPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Left column: Shipping & Payment Method Form */}
         <div className="lg:col-span-7">
           <CheckoutForm
             cartId={cartId}
@@ -227,7 +220,6 @@ export default function CheckoutPage() {
           />
         </div>
 
-        {/* Right column: Order Summary */}
         <div className="lg:col-span-5 lg:sticky lg:top-24">
           <CheckoutSummary />
         </div>

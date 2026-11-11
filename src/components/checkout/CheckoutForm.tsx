@@ -24,8 +24,7 @@ import {
   createCashOrder,
   createOnlineCheckoutSession,
   isValidCheckoutUrl,
-  OrderApiError,
-} from "@/services/order.service";
+} from "@/services/orderService";
 import type { OrderData } from "@/types/order";
 
 interface CheckoutFormProps {
@@ -81,7 +80,6 @@ export default function CheckoutForm({
         const response = await createCashOrder(cartId, token, shippingAddress);
 
         if (response.status === "success") {
-          // Synchronize authoritative cart state from Route API backend
           await refreshCart();
           onCashOrderSuccess(response.data);
         } else {
@@ -91,9 +89,7 @@ export default function CheckoutForm({
         }
       } catch (err) {
         const message =
-          err instanceof OrderApiError
-            ? err.message
-            : err instanceof Error
+          err instanceof Error
             ? err.message
             : "An unexpected error occurred while placing your order.";
         setServerError(message);
@@ -122,7 +118,6 @@ export default function CheckoutForm({
             return;
           }
 
-          // Navigate to Stripe Checkout URL using normal browser navigation
           window.location.assign(checkoutUrl);
         } else {
           setIsRedirecting(false);
@@ -134,9 +129,7 @@ export default function CheckoutForm({
       } catch (err) {
         setIsRedirecting(false);
         const message =
-          err instanceof OrderApiError
-            ? err.message
-            : err instanceof Error
+          err instanceof Error
             ? err.message
             : "An unexpected error occurred while initiating online payment.";
         setServerError(message);
@@ -185,9 +178,7 @@ export default function CheckoutForm({
         </div>
       )}
 
-      {/* Shipping Address Inputs */}
       <div className="space-y-5">
-        {/* Street Details */}
         <div>
           <label
             htmlFor="details"
@@ -218,7 +209,6 @@ export default function CheckoutForm({
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {/* City */}
           <div>
             <label
               htmlFor="city"
@@ -248,7 +238,6 @@ export default function CheckoutForm({
             )}
           </div>
 
-          {/* Phone */}
           <div>
             <label
               htmlFor="phone"
@@ -280,7 +269,6 @@ export default function CheckoutForm({
         </div>
       </div>
 
-      {/* Payment Method Selector */}
       <div className="border-t border-neutral-200 pt-6">
         <h3 className="text-base font-bold text-primary mb-1">
           Payment Method
@@ -290,7 +278,6 @@ export default function CheckoutForm({
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {/* Cash on Delivery option */}
           <div
             onClick={() => handleSelectPaymentMethod("cash")}
             className={`relative flex flex-col p-4 rounded-xl border-2 cursor-pointer transition-all has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-primary ${
@@ -336,7 +323,6 @@ export default function CheckoutForm({
             </p>
           </div>
 
-          {/* Online Payment (Stripe) option */}
           <div
             onClick={() => handleSelectPaymentMethod("online")}
             className={`relative flex flex-col p-4 rounded-xl border-2 cursor-pointer transition-all has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-primary ${
@@ -390,7 +376,6 @@ export default function CheckoutForm({
         )}
       </div>
 
-      {/* Submit Button */}
       <div className="border-t border-neutral-200 pt-6">
         <Button
           type="submit"

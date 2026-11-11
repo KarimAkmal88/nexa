@@ -1,6 +1,6 @@
 
 import BrandsPagination from "@/components/brand/BrandsPagination";
-import brandsApiServices from "@/services/brandsService";
+import { getBrands } from "@/services/brandsService";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -8,7 +8,7 @@ import { notFound } from "next/navigation";
 export default async function Brands({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
     const page = Number((await searchParams).page ?? "1");
     if (!Number.isSafeInteger(page) || page < 1) notFound();
-    const { data: brands, metadata } = await brandsApiServices.getBrands(page);
+    const { data: brands, metadata } = await getBrands(page);
     if (page > Math.max(1, metadata.numberOfPages)) notFound();
     return (
         <main className="mx-auto max-w-7xl px-4 py-8">

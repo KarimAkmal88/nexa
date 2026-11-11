@@ -22,7 +22,6 @@ export default function CartItemRow({ item, currency = "EGP" }: CartItemRowProps
   const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
   const targetCountRef = useRef<number>(item.count);
 
-  // Clean up any active debounce timer on unmount
   useEffect(() => {
     return () => {
       if (debounceTimerRef.current) {
@@ -50,7 +49,6 @@ export default function CartItemRow({ item, currency = "EGP" }: CartItemRowProps
       const success = await updateQuantity(item.product._id, target);
 
       if (!success) {
-        // Restore confirmed quantity from Cart Context on failure
         targetCountRef.current = item.count;
       }
 
@@ -92,7 +90,6 @@ export default function CartItemRow({ item, currency = "EGP" }: CartItemRowProps
 
   return (
     <li className="flex flex-col sm:flex-row gap-4 py-5 sm:py-6 border-b border-neutral-200 last:border-b-0">
-      {/* Product Image */}
       <Link
         href={`/products/${encodeURIComponent(item.product._id)}`}
         className="relative size-24 sm:size-28 shrink-0 overflow-hidden rounded-xl bg-muted border border-neutral-100 self-center sm:self-start"
@@ -107,7 +104,6 @@ export default function CartItemRow({ item, currency = "EGP" }: CartItemRowProps
         />
       </Link>
 
-      {/* Details & Controls */}
       <div className="flex flex-1 flex-col justify-between gap-3 min-w-0">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0 flex-1">
@@ -131,7 +127,6 @@ export default function CartItemRow({ item, currency = "EGP" }: CartItemRowProps
             </div>
           </div>
 
-          {/* Remove Button */}
           <button
             type="button"
             onClick={handleRemove}
@@ -147,7 +142,6 @@ export default function CartItemRow({ item, currency = "EGP" }: CartItemRowProps
           </button>
         </div>
 
-        {/* Pricing and Quantity Controls */}
         <div className="flex flex-wrap items-end justify-between gap-4 pt-2">
           <div>
             <p className="text-base sm:text-lg font-bold text-primary">
@@ -160,7 +154,6 @@ export default function CartItemRow({ item, currency = "EGP" }: CartItemRowProps
             )}
           </div>
 
-          {/* Quantity Spinner Control */}
           <div
             role="group"
             aria-label={`Quantity for ${item.product.title}`}

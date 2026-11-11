@@ -1,7 +1,7 @@
 import CategoryProductsPagination from "@/components/category/CategoryProductsPagination";
 import ProductGrid from "@/components/product/ProductGrid";
-import categoriesApiServices from "@/services/categoriesService";
-import productsApiServices from "@/services/productsService";
+import { getCategoryDetails, getSubcategories } from "@/services/categoriesService";
+import { getProducts } from "@/services/productsService";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -17,15 +17,15 @@ export default async function CategoryDetails({ params, searchParams }: {
     if (subcategory !== undefined && !/^[a-f\d]{24}$/i.test(subcategory)) notFound();
 
     const [categoryResponse, subcategories] = await Promise.all([
-        categoriesApiServices.getCategoryDetails(categoryId),
-        categoriesApiServices.getSubcategories(categoryId),
+        getCategoryDetails(categoryId),
+        getSubcategories(categoryId),
     ]);
     if (!categoryResponse?.data) notFound();
     const category = categoryResponse.data;
     const selectedSubcategory = subcategories.find((item) => item._id === subcategory);
     if (subcategory && !selectedSubcategory) notFound();
 
-    const { data: products, metadata } = await productsApiServices.getProducts(page, { category: categoryId, subcategory });
+    const { data: products, metadata } = await getProducts(page, { category: categoryId, subcategory });
     if (page > Math.max(1, metadata.numberOfPages)) notFound();
     const basePath = `/categories/${encodeURIComponent(categoryId)}`;
 

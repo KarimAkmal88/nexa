@@ -36,7 +36,6 @@ export default function AddToCartBtn({
     e.preventDefault();
     e.stopPropagation();
 
-    // If unauthenticated, redirect to login with current page and query string as callback
     if (status === "unauthenticated" || !session?.token) {
       const search = typeof window !== "undefined" ? window.location.search : "";
       const returnUrl = search ? `${pathname}${search}` : (pathname || "/");

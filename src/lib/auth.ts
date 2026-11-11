@@ -4,7 +4,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL || "https://ecommerce.routemisr.com";
 
-// Ensure robust ESM/CJS interop for CredentialsProvider across Next.js and Node runtimes
 const Credentials =
   typeof CredentialsProvider === "function"
     ? CredentialsProvider

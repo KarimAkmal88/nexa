@@ -43,7 +43,6 @@ function Navigation({ pathname }: { pathname: string }) {
   const active = (href: string) =>
     href === "/" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
 
-  // Close user dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -69,7 +68,7 @@ function Navigation({ pathname }: { pathname: string }) {
 
   return (
     <header
-      className="border-b bg-card relative z-40"
+      className="sticky top-0 z-40 border-b bg-card"
       onKeyDown={(event) => {
         if (event.key === "Escape") {
           if (userMenuOpen) {
@@ -102,7 +101,6 @@ function Navigation({ pathname }: { pathname: string }) {
           />
         </Link>
 
-        {/* Desktop Navigation Links */}
         <nav aria-label="Main navigation" className="hidden items-center gap-8 md:flex">
           {links.map(([href, label]) => (
             <Link
@@ -120,7 +118,6 @@ function Navigation({ pathname }: { pathname: string }) {
           ))}
         </nav>
 
-        {/* Right Action Icons & Auth Controls */}
         <div className="flex items-center gap-2 sm:gap-3">
           <Link
             href="/wishlist"
@@ -190,7 +187,6 @@ function Navigation({ pathname }: { pathname: string }) {
             <span className="hidden sm:inline">Cart</span>
           </Link>
 
-          {/* Desktop Auth Section */}
           <div className="hidden md:flex items-center gap-2">
             {status === "authenticated" && session?.user ? (
               <div className="relative" ref={userMenuRef}>
@@ -266,7 +262,6 @@ function Navigation({ pathname }: { pathname: string }) {
             )}
           </div>
 
-          {/* Mobile Navigation Toggle */}
           <button
             ref={toggleRef}
             type="button"
@@ -281,7 +276,6 @@ function Navigation({ pathname }: { pathname: string }) {
         </div>
       </div>
 
-      {/* Mobile Drawer */}
       <nav
         id="mobile-navigation"
         aria-label="Mobile navigation"
@@ -330,7 +324,6 @@ function Navigation({ pathname }: { pathname: string }) {
           </Link>
         </div>
 
-        {/* Mobile Auth Links */}
         <div className="border-t border-neutral-100 pt-3">
           {status === "authenticated" && session?.user ? (
             <div className="space-y-1">

@@ -1,6 +1,6 @@
 import ProductCard from "@/components/product/ProductCard";
 import ProductPagination from "@/components/product/ProductsPagination";
-import productsApiServices from "@/services/productsService";
+import { getProducts } from "@/services/productsService";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -22,7 +22,7 @@ export default async function Products({ searchParams }: ProductsProps) {
         notFound()
     }
 
-    const { metadata, data: products } = await productsApiServices.getProducts(parsedPage);
+    const { metadata, data: products } = await getProducts(parsedPage);
 
     if (parsedPage > Math.max(1, metadata.numberOfPages)) {
         notFound();

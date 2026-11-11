@@ -33,7 +33,6 @@ export default function WishlistToggleBtn({
     e.preventDefault();
     e.stopPropagation();
 
-    // If unauthenticated, redirect to login with current return URL
     if (status === "unauthenticated" || !session?.token) {
       const search =
         typeof window !== "undefined" ? window.location.search : "";
@@ -98,7 +97,6 @@ export default function WishlistToggleBtn({
     );
   }
 
-  // Default "icon" variant for product cards and compact headers
   const containerSizes = {
     sm: "size-7",
     default: "size-9",

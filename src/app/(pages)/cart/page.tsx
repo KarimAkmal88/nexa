@@ -11,7 +11,6 @@ export default function CartPage() {
   const { status } = useSession();
   const { cart, numOfCartItems, isLoading, error, clearError, refreshCart } = useCart();
 
-  // 1. Unauthenticated User View
   if (status === "unauthenticated") {
     return (
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full flex-1 flex items-center justify-center">
@@ -35,7 +34,6 @@ export default function CartPage() {
     );
   }
 
-  // 2. Initial Loading State
   if (status === "loading" || isLoading) {
     return (
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full flex-1 flex flex-col items-center justify-center">
@@ -45,7 +43,6 @@ export default function CartPage() {
     );
   }
 
-  // 3. Initial Cart Load Failure (no confirmed cart data exists, but error occurred)
   if (!cart && error) {
     return (
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full flex-1 flex items-center justify-center">
@@ -70,7 +67,6 @@ export default function CartPage() {
 
   const products = cart?.products ?? [];
 
-  // 4. Successfully Loaded Empty Cart View
   if (cart && products.length === 0) {
     return (
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex-1">
@@ -107,10 +103,8 @@ export default function CartPage() {
     );
   }
 
-  // 5. Populated Cart View
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1">
-      {/* Breadcrumb */}
       <nav
         aria-label="Breadcrumb"
         className="mb-6 flex items-center gap-2 text-sm text-muted-foreground"
@@ -124,7 +118,6 @@ export default function CartPage() {
         </span>
       </nav>
 
-      {/* Header */}
       <div className="mb-8 flex flex-wrap items-baseline justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight text-primary">Shopping Cart</h1>
@@ -142,7 +135,6 @@ export default function CartPage() {
         </Link>
       </div>
 
-      {/* Error Alert Banner for Populated Cart (mutations or refresh errors) */}
       {error && (
         <div
           role="alert"
@@ -159,9 +151,7 @@ export default function CartPage() {
         </div>
       )}
 
-      {/* Main Grid: Products List & Order Summary */}
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.7fr)_minmax(320px,1fr)] lg:gap-12 items-start">
-        {/* Products Section */}
         <section
           aria-label="Cart products list"
           className="rounded-2xl border border-neutral-200 bg-card p-6 shadow-xs"
@@ -173,7 +163,6 @@ export default function CartPage() {
           </ul>
         </section>
 
-        {/* Order Summary Aside */}
         <CartSummary />
       </div>
     </main>

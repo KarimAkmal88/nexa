@@ -10,7 +10,6 @@ export async function proxy(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
 
-  // Protect /change-password and /checkout routes
   if (pathname.startsWith("/change-password") || pathname.startsWith("/checkout")) {
     if (!token) {
       const loginUrl = new URL("/login", request.url);
@@ -19,7 +18,6 @@ export async function proxy(request: NextRequest) {
     }
   }
 
-  // Redirect authenticated users away from auth pages (/login, /register, /forgot-password)
   if (
     pathname.startsWith("/login") ||
     pathname.startsWith("/register") ||

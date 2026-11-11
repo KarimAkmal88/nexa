@@ -26,7 +26,6 @@ export default function WishlistPage() {
     refreshWishlist,
   } = useWishlist();
 
-  // 1. Unauthenticated View
   if (status === "unauthenticated") {
     return (
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full flex-1 flex items-center justify-center">
@@ -52,7 +51,6 @@ export default function WishlistPage() {
     );
   }
 
-  // 2. Loading State
   if (status === "loading" || isLoading) {
     return (
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full flex-1 flex flex-col items-center justify-center">
@@ -64,7 +62,6 @@ export default function WishlistPage() {
     );
   }
 
-  // 3. Error State (Initial load failed)
   if (!wishlistProducts && error) {
     return (
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full flex-1 flex items-center justify-center">
@@ -91,7 +88,6 @@ export default function WishlistPage() {
 
   const products = wishlistProducts ?? [];
 
-  // 4. Empty Wishlist View
   if (products.length === 0) {
     return (
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex-1">
@@ -130,7 +126,6 @@ export default function WishlistPage() {
     );
   }
 
-  // 5. Populated Wishlist View
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex-1">
       <nav

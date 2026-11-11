@@ -1,7 +1,7 @@
 import BrandsPagination from "@/components/brand/BrandsPagination";
 import ProductGrid from "@/components/product/ProductGrid";
-import brandsApiServices from "@/services/brandsService";
-import productsApiServices from "@/services/productsService";
+import { getBrandDetails } from "@/services/brandsService";
+import { getProducts } from "@/services/productsService";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -13,10 +13,10 @@ export default async function BrandDetails({ params, searchParams }: {
     const { brandId } = await params;
     const page = Number((await searchParams).page ?? "1");
     if (!/^[a-f\d]{24}$/i.test(brandId) || !Number.isSafeInteger(page) || page < 1) notFound();
-    const brandResponse = await brandsApiServices.getBrandDetails(brandId);
+    const brandResponse = await getBrandDetails(brandId);
     if (!brandResponse?.data) notFound();
     const brand = brandResponse.data;
-    const { data: products, metadata } = await productsApiServices.getProducts(page, { brand: brandId });
+    const { data: products, metadata } = await getProducts(page, { brand: brandId });
     if (page > Math.max(1, metadata.numberOfPages)) notFound();
     return (
         <main className="mx-auto max-w-7xl px-4 py-8">

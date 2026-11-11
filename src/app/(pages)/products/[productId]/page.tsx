@@ -1,7 +1,7 @@
 import ProductGallery from "@/components/product/ProductGallery";
 import AddToCartBtn from "@/components/product/AddToCartBtn";
 import WishlistToggleBtn from "@/components/wishlist/WishlistToggleBtn";
-import productsApiServices from "@/services/productsService";
+import { getProductDetails } from "@/services/productsService";
 import { ArrowLeft, ChevronRight, Star } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -14,7 +14,7 @@ export default async function ProductDetails({ params }: ProductDetailsProps) {
     const resolvedParams = await params;
     const productId = resolvedParams.productId;
     if (!/^[a-f\d]{24}$/i.test(productId)) notFound();
-    const response = await productsApiServices.getProductDetails(productId);
+    const response = await getProductDetails(productId);
     if (response === null) {
         notFound();
     }

@@ -1,10 +1,10 @@
 
-import categoriesApiServices from "@/services/categoriesService";
+import { getCategories } from "@/services/categoriesService";
 import Image from "next/image";
 import Link from "next/link";
 
 export default async function Categories() {
-    const { data: categories } = await categoriesApiServices.getCategories();
+    const { data: categories } = await getCategories();
     return (
         <main className="mx-auto w-full max-w-7xl px-4 py-8">
             <h1 className="mb-2 text-3xl font-semibold tracking-tight text-primary">Categories</h1>

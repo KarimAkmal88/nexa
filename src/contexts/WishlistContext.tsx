@@ -15,8 +15,7 @@ import {
   getUserWishlist,
   addProductToWishlist,
   removeProductFromWishlist,
-  WishlistApiError,
-} from "@/services/wishlist.service";
+} from "@/services/wishlistService";
 
 export interface WishlistContextValue {
   wishlistIds: string[];
@@ -61,8 +60,6 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
   const [mutatingIds, setMutatingIds] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  // Clear wishlist immediately during render when account changes or user logs out.
-  // This prevents displaying the previous account's saved items before effects run.
   if (state.userKey !== currentUserKey) {
     setState({
       userKey: currentUserKey,
@@ -71,7 +68,6 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
     });
   }
 
-  // Derive wishlist values directly from authoritative session state
   const isCurrentSession =
     state.userKey === currentUserKey && currentUserKey !== null;
   const wishlistIds = useMemo(() => {
@@ -88,7 +84,6 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
       error === null);
   const isLoading = isInitialLoading || isRefreshing;
 
-  // Load wishlist when user logs in or account changes
   useEffect(() => {
     if (status !== "authenticated" || !currentUserKey || !token) {
       return;
@@ -111,11 +106,7 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
       .catch((err) => {
         if (!isMounted) return;
         const message =
-          err instanceof WishlistApiError
-            ? err.message
-            : err instanceof Error
-            ? err.message
-            : "Failed to load wishlist.";
+          err instanceof Error ? err.message : "Failed to load wishlist.";
         setError(message);
       });
 
@@ -140,11 +131,7 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
       setError(null);
     } catch (err) {
       const message =
-        err instanceof WishlistApiError
-          ? err.message
-          : err instanceof Error
-          ? err.message
-          : "Failed to refresh wishlist.";
+        err instanceof Error ? err.message : "Failed to refresh wishlist.";
       setError(message);
     } finally {
       setIsRefreshing(false);
@@ -195,7 +182,6 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
           wishlistIds: updatedIds,
         }));
 
-        // If full wishlist products are loaded, silently fetch to keep full product details in sync
         if (state.wishlistProducts !== null) {
           getUserWishlist(token)
             .then((res) => {
@@ -206,16 +192,13 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
               }));
             })
             .catch(() => {
-              // Silently ignore background sync error; ID list is already updated
             });
         }
 
         return true;
       } catch (err) {
         const message =
-          err instanceof WishlistApiError
-            ? err.message
-            : err instanceof Error
+          err instanceof Error
             ? err.message
             : "Failed to add product to wishlist.";
         setError(message);
@@ -260,9 +243,7 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
         return true;
       } catch (err) {
         const message =
-          err instanceof WishlistApiError
-            ? err.message
-            : err instanceof Error
+          err instanceof Error
             ? err.message
             : "Failed to remove product from wishlist.";
         setError(message);
