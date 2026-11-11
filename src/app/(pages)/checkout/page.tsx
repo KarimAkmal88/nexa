@@ -25,7 +25,7 @@ export default function CheckoutPage() {
   if (status === "unauthenticated") {
     return (
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full flex-1 flex items-center justify-center">
-        <div className="flex flex-col items-center max-w-md text-center p-8 rounded-3xl border border-neutral-200 bg-card shadow-xs">
+        <div className="flex flex-col items-center max-w-md text-center p-8 rounded-3xl border border-border bg-card shadow-xs">
           <div className="mb-5 flex size-16 items-center justify-center rounded-full bg-secondary text-primary">
             <ShoppingBag className="size-8" aria-hidden="true" />
           </div>
@@ -77,9 +77,9 @@ export default function CheckoutPage() {
             Thank you for shopping with Nexa. Your Cash on Delivery order has been registered and is being prepared for dispatch.
           </p>
 
-          <div className="mt-8 w-full max-w-lg rounded-2xl border border-neutral-200 bg-neutral-50/70 p-6 text-left space-y-4 text-sm">
+          <div className="mt-8 w-full max-w-lg rounded-2xl border border-border bg-muted/50 p-6 text-left space-y-4 text-sm">
             {orderRef && (
-              <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
+              <div className="flex items-center justify-between border-b border-border pb-3">
                 <span className="text-muted-foreground">Order Reference:</span>
                 <span className="font-mono text-xs font-semibold text-primary break-all">
                   {String(orderRef)}
@@ -87,7 +87,7 @@ export default function CheckoutPage() {
               </div>
             )}
 
-            <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
+            <div className="flex items-center justify-between border-b border-border pb-3">
               <span className="text-muted-foreground">Payment Method:</span>
               <span className="font-semibold text-foreground">
                 Cash on Delivery
@@ -95,7 +95,7 @@ export default function CheckoutPage() {
             </div>
 
             {orderTotal > 0 && (
-              <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
+              <div className="flex items-center justify-between border-b border-border pb-3">
                 <span className="text-muted-foreground">Total Amount:</span>
                 <span className="font-bold text-primary text-base">
                   {orderTotal.toLocaleString()} EGP
@@ -126,13 +126,13 @@ export default function CheckoutPage() {
             </Link>
             <Link
               href="/products"
-              className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full border border-neutral-200 px-6 py-3.5 text-sm font-semibold text-foreground hover:bg-neutral-50 transition-colors"
+              className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full border border-border px-6 py-3.5 text-sm font-semibold text-foreground hover:bg-secondary transition-colors"
             >
               <span>Continue Shopping</span>
             </Link>
             <Link
               href="/cart"
-              className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full border border-neutral-200 px-6 py-3.5 text-sm font-semibold text-foreground hover:bg-neutral-50 transition-colors"
+              className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full border border-border px-6 py-3.5 text-sm font-semibold text-foreground hover:bg-secondary transition-colors"
             >
               <ArrowLeft className="size-4" aria-hidden="true" />
               <span>Back to Cart</span>
@@ -163,7 +163,7 @@ export default function CheckoutPage() {
           </span>
         </nav>
 
-        <div className="flex flex-col items-center max-w-md mx-auto text-center py-16 px-6 rounded-3xl border border-neutral-200 bg-card shadow-xs">
+        <div className="flex flex-col items-center max-w-md mx-auto text-center py-16 px-6 rounded-3xl border border-border bg-card shadow-xs">
           <div className="mb-5 flex size-16 items-center justify-center rounded-full bg-secondary text-primary">
             <PackageCheck className="size-8" aria-hidden="true" />
           </div>

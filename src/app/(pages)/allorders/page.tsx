@@ -51,7 +51,7 @@ async function OrdersList() {
           </a>
           <Link
             href="/products"
-            className="rounded-full border border-neutral-200 px-6 py-3 text-sm font-semibold text-foreground hover:bg-neutral-50 transition-colors"
+            className="rounded-full border border-border px-6 py-3 text-sm font-semibold text-foreground hover:bg-secondary transition-colors"
           >
             Browse Products
           </Link>
@@ -68,7 +68,7 @@ async function OrdersList() {
 
   if (sortedOrders.length === 0) {
     return (
-      <div className="flex flex-col items-center max-w-md mx-auto text-center py-16 px-6 rounded-3xl border border-neutral-200 bg-card shadow-xs">
+      <div className="flex flex-col items-center max-w-md mx-auto text-center py-16 px-6 rounded-3xl border border-border bg-card shadow-xs">
         <div className="mb-5 flex size-16 items-center justify-center rounded-full bg-secondary text-primary">
           <Package className="size-8" aria-hidden="true" />
         </div>
@@ -120,12 +120,12 @@ export default function AllOrdersPage() {
         </span>
       </nav>
 
-      <div className="mb-8 border-b border-neutral-200 pb-5">
+      <div className="mb-8 border-b border-border pb-5">
         <h1 className="text-3xl font-bold tracking-tight text-primary">
           My Orders
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Track your recent Cash on Delivery and online card orders.
+          Track your recent orders.
         </p>
       </div>
 

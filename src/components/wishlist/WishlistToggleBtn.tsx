@@ -69,13 +69,13 @@ export default function WishlistToggleBtn({
         aria-label={accessibleLabel}
         aria-pressed={isSaved}
         className={cn(
-          "inline-flex items-center justify-center gap-2 rounded-full border font-medium transition-all focus-visible:outline-2 focus-visible:outline-offset-2",
+          "group inline-flex items-center justify-center gap-2 rounded-full border font-medium transition-all focus-visible:outline-2 focus-visible:outline-offset-2",
           size === "sm" && "px-3 py-1.5 text-xs",
           size === "default" && "px-4 py-2 text-sm",
           size === "lg" && "px-6 py-3 text-base",
           isSaved
-            ? "border-rose-200 bg-rose-50 text-rose-600 hover:bg-rose-100"
-            : "border-neutral-200 bg-background text-neutral-700 hover:bg-neutral-50 hover:text-rose-600",
+            ? "border-accent/40 bg-accent/10 text-foreground hover:bg-accent/15"
+            : "border-border bg-background text-foreground hover:bg-secondary hover:border-primary/30",
           isMutating && "cursor-not-allowed opacity-75",
           className
         )}
@@ -87,7 +87,7 @@ export default function WishlistToggleBtn({
             className={cn(
               iconSizes[size],
               "transition-colors",
-              isSaved ? "fill-rose-500 text-rose-500" : "text-neutral-500"
+              isSaved ? "fill-accent text-accent" : "text-muted-foreground group-hover:text-accent"
             )}
             aria-hidden="true"
           />
@@ -111,23 +111,23 @@ export default function WishlistToggleBtn({
       aria-label={accessibleLabel}
       aria-pressed={isSaved}
       className={cn(
-        "flex items-center justify-center rounded-full border border-neutral-200/80 bg-white/90 backdrop-blur-xs shadow-xs transition-all hover:bg-white hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2",
+        "flex items-center justify-center rounded-full border border-border/80 bg-white/90 backdrop-blur-xs shadow-xs transition-all hover:bg-white hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2",
         containerSizes[size],
         isSaved
-          ? "border-rose-200 text-rose-500"
-          : "text-neutral-500 hover:text-rose-500",
+          ? "border-accent/40 text-accent"
+          : "text-muted-foreground hover:text-accent",
         isMutating && "cursor-not-allowed opacity-75",
         className
       )}
     >
       {isMutating ? (
-        <Loader2 className={cn(iconSizes[size], "animate-spin text-neutral-400")} aria-hidden="true" />
+        <Loader2 className={cn(iconSizes[size], "animate-spin text-muted-foreground")} aria-hidden="true" />
       ) : (
         <Heart
           className={cn(
             iconSizes[size],
             "transition-colors",
-            isSaved ? "fill-rose-500 text-rose-500" : "hover:text-rose-500"
+            isSaved ? "fill-accent text-accent" : "hover:text-accent"
           )}
           aria-hidden="true"
         />

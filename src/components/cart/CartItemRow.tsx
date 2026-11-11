@@ -89,10 +89,10 @@ export default function CartItemRow({ item, currency = "EGP" }: CartItemRowProps
   const itemSubtotal = item.price * displayCount;
 
   return (
-    <li className="flex flex-col sm:flex-row gap-4 py-5 sm:py-6 border-b border-neutral-200 last:border-b-0">
+    <li className="flex flex-col sm:flex-row gap-4 py-5 sm:py-6 border-b border-border last:border-b-0">
       <Link
         href={`/products/${encodeURIComponent(item.product._id)}`}
-        className="relative size-24 sm:size-28 shrink-0 overflow-hidden rounded-xl bg-muted border border-neutral-100 self-center sm:self-start"
+        className="relative size-24 sm:size-28 shrink-0 overflow-hidden rounded-xl bg-muted border border-border self-center sm:self-start"
       >
         <Image
           src={item.product.imageCover}
@@ -157,7 +157,7 @@ export default function CartItemRow({ item, currency = "EGP" }: CartItemRowProps
           <div
             role="group"
             aria-label={`Quantity for ${item.product.title}`}
-            className="flex items-center rounded-full border border-neutral-200 bg-background px-1 py-0.5 shadow-2xs"
+            className="flex items-center rounded-full border border-border bg-background px-1 py-0.5 shadow-2xs"
           >
             <button
               type="button"

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
@@ -89,16 +88,9 @@ function Navigation({ pathname }: { pathname: string }) {
             setMobileOpen(false);
             setUserMenuOpen(false);
           }}
-          className="shrink-0 rounded-sm"
+          className="inline-block shrink-0 rounded-sm text-3xl font-bold leading-none tracking-tighter text-primary sm:text-4xl"
         >
-          <Image
-            src="/assets/logos/Minimalist Nexa Wordmark Logo.png"
-            alt="Nexa"
-            width={2160}
-            height={728}
-            className="h-auto w-36 sm:w-44"
-            priority
-          />
+          nexa<span className="text-accent">.</span>
         </Link>
 
         <nav aria-label="Main navigation" className="hidden items-center gap-8 md:flex">
@@ -131,7 +123,7 @@ function Navigation({ pathname }: { pathname: string }) {
               setMobileOpen(false);
               setUserMenuOpen(false);
             }}
-            className={`flex min-h-10 items-center gap-2 rounded-full px-3 text-sm font-medium hover:bg-secondary ${
+            className={`group flex min-h-10 items-center gap-2 rounded-full px-3 text-sm font-medium hover:bg-secondary ${
               active("/wishlist") ? "bg-secondary" : ""
             }`}
           >
@@ -141,14 +133,16 @@ function Navigation({ pathname }: { pathname: string }) {
                 aria-hidden="true"
                 className={
                   status === "authenticated" && wishlistCount > 0
-                    ? "fill-rose-500 text-rose-500"
+                    ? active("/wishlist")
+                      ? "fill-primary text-primary"
+                      : "fill-accent text-accent group-hover:fill-primary group-hover:text-primary"
                     : ""
                 }
               />
               {status === "authenticated" && wishlistCount > 0 && (
                 <span
                   aria-hidden="true"
-                  className="absolute -top-1.5 -right-2 flex size-4 items-center justify-center rounded-full bg-rose-600 px-1 text-[10px] font-bold text-white leading-none"
+                  className="absolute -top-1.5 -right-2 flex size-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground leading-none"
                 >
                   {wishlistCount > 99 ? "99+" : wishlistCount}
                 </span>
@@ -322,14 +316,16 @@ function Navigation({ pathname }: { pathname: string }) {
                 aria-hidden="true"
                 className={
                   status === "authenticated" && wishlistCount > 0
-                    ? "fill-rose-500 text-rose-500"
+                    ? active("/wishlist")
+                      ? "fill-primary text-primary"
+                      : "fill-accent text-accent"
                     : "text-neutral-500"
                 }
               />
               <span>Wishlist</span>
             </div>
             {status === "authenticated" && wishlistCount > 0 && (
-              <span className="rounded-full bg-rose-100 px-2 py-0.5 text-xs font-semibold text-rose-600">
+              <span className="rounded-full bg-primary px-2 py-0.5 text-xs font-semibold text-primary-foreground">
                 {wishlistCount}
               </span>
             )}

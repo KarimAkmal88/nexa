@@ -7,13 +7,13 @@ export default function Hero() {
     <section aria-labelledby="hero-heading" className="mx-auto max-w-7xl px-5 pb-12 pt-12 sm:px-8 sm:pt-16 lg:px-12 lg:pt-20">
       <div className="mb-10 grid items-end gap-7 lg:grid-cols-[1.3fr_1fr] lg:gap-16">
         <div>
-          <p className="mb-5 flex items-center gap-2 text-xs font-semibold tracking-[0.2em] text-primary"><span className="size-2 rounded-full bg-primary" aria-hidden="true" /> EVERYDAY, REIMAGINED</p>
+          <p className="mb-5 flex items-center gap-2 text-xs font-semibold tracking-[0.2em] text-primary"><span className="size-2 rounded-full bg-accent" aria-hidden="true" /> EVERYDAY, REIMAGINED</p>
           <h1 id="hero-heading" className="text-[clamp(2rem,6vw,5rem)] font-semibold leading-[1.08] tracking-[-0.055em] text-primary">DISCOVER MORE.<br />SHOP BETTER.</h1>
         </div>
         <div className="lg:pb-1">
           <p className="max-w-md text-base leading-7 text-foreground/75">Your world, with more possibilities. Explore style, technology, and everyday living in one place.</p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link href="/products" className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-accent px-6 text-sm font-semibold text-accent-foreground hover:bg-primary hover:text-primary-foreground">Explore Products <ArrowUpRight size={18} aria-hidden="true" /></Link>
+            <Link href="/products" className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90">Explore Products <ArrowUpRight size={18} aria-hidden="true" /></Link>
             <Link href="/categories" className="inline-flex min-h-12 items-center justify-center rounded-full border border-primary/25 px-6 text-sm font-semibold text-primary hover:bg-secondary">Shop by Category</Link>
           </div>
         </div>

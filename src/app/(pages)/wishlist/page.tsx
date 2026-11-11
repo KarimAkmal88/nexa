@@ -29,8 +29,8 @@ export default function WishlistPage() {
   if (status === "unauthenticated") {
     return (
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full flex-1 flex items-center justify-center">
-        <div className="flex flex-col items-center max-w-md text-center p-8 rounded-3xl border border-neutral-200 bg-card shadow-xs">
-          <div className="mb-5 flex size-16 items-center justify-center rounded-full bg-rose-50 text-rose-500">
+        <div className="flex flex-col items-center max-w-md text-center p-8 rounded-3xl border border-border bg-card shadow-xs">
+          <div className="mb-5 flex size-16 items-center justify-center rounded-full bg-accent/10 text-accent">
             <Heart className="size-8" aria-hidden="true" />
           </div>
           <h1 className="text-2xl font-bold tracking-tight text-primary">
@@ -104,8 +104,8 @@ export default function WishlistPage() {
           </span>
         </nav>
 
-        <div className="flex flex-col items-center max-w-md mx-auto text-center py-16 px-6 rounded-3xl border border-neutral-200 bg-card shadow-xs">
-          <div className="mb-5 flex size-16 items-center justify-center rounded-full bg-rose-50 text-rose-500">
+        <div className="flex flex-col items-center max-w-md mx-auto text-center py-16 px-6 rounded-3xl border border-border bg-card shadow-xs">
+          <div className="mb-5 flex size-16 items-center justify-center rounded-full bg-accent/10 text-accent">
             <Heart className="size-8" aria-hidden="true" />
           </div>
           <h1 className="text-2xl font-bold tracking-tight text-primary">
@@ -141,7 +141,7 @@ export default function WishlistPage() {
         </span>
       </nav>
 
-      <div className="mb-8 flex flex-wrap items-baseline justify-between gap-4 border-b border-neutral-200 pb-5">
+      <div className="mb-8 flex flex-wrap items-baseline justify-between gap-4 border-b border-border pb-5">
         <div>
           <h1 className="text-3xl font-bold tracking-tight text-primary">
             My Wishlist

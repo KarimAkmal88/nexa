@@ -57,10 +57,10 @@ export function LoginForm() {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto p-6 sm:p-8 bg-card rounded-xl border border-neutral-200 shadow-xs">
+    <div className="w-full max-w-md mx-auto p-6 sm:p-8 bg-card rounded-xl border border-border shadow-xs">
       <div className="mb-6 text-center">
-        <h1 className="text-2xl font-bold tracking-tight text-neutral-900">Welcome back</h1>
-        <p className="mt-2 text-sm text-neutral-600">
+        <h1 className="text-2xl font-bold tracking-tight text-primary">Welcome back</h1>
+        <p className="mt-2 text-sm text-muted-foreground">
           Sign in to your Nexa account to continue
         </p>
       </div>
@@ -78,7 +78,7 @@ export function LoginForm() {
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-medium text-neutral-700 mb-1.5"
+            className="block text-sm font-medium text-foreground mb-1.5"
           >
             Email address
           </label>
@@ -102,7 +102,7 @@ export function LoginForm() {
           <div className="flex items-center justify-between mb-1.5">
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-neutral-700"
+              className="block text-sm font-medium text-foreground"
             >
               Password
             </label>
@@ -129,7 +129,7 @@ export function LoginForm() {
               onClick={() => setShowPassword((prev) => !prev)}
               aria-label={showPassword ? "Hide password" : "Show password"}
               aria-pressed={showPassword}
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-neutral-500 hover:text-neutral-800 rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary"
+              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-muted-foreground hover:text-foreground rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary"
             >
               {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
             </button>
@@ -157,7 +157,7 @@ export function LoginForm() {
         </Button>
       </form>
 
-      <div className="mt-6 text-center text-sm text-neutral-600">
+      <div className="mt-6 text-center text-sm text-muted-foreground">
         Don&apos;t have an account?{" "}
         <Link
           href="/register"

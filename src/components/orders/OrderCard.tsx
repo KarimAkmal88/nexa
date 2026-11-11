@@ -37,14 +37,14 @@ export default function OrderCard({ order }: OrderCardProps) {
   const address = order.shippingAddress;
 
   return (
-    <article className="rounded-2xl border border-neutral-200 bg-card p-6 shadow-xs">
-      <div className="flex flex-col gap-4 border-b border-neutral-200 pb-5 sm:flex-row sm:items-start sm:justify-between">
+    <article className="rounded-2xl border border-border bg-card p-6 shadow-xs">
+      <div className="flex flex-col gap-4 border-b border-border pb-5 sm:flex-row sm:items-start sm:justify-between">
         <div className="space-y-1">
           <div className="flex flex-wrap items-center gap-2">
             <h2 className="text-base font-bold text-primary">
               Order #{String(orderRef)}
             </h2>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-neutral-50 px-2.5 py-0.5 text-xs font-medium text-foreground">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted/60 px-2.5 py-0.5 text-xs font-medium text-foreground">
               {isCardPayment ? (
                 <CreditCard className="size-3.5 text-primary" aria-hidden="true" />
               ) : (
@@ -84,7 +84,7 @@ export default function OrderCard({ order }: OrderCardProps) {
             className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold ${
               isDelivered
                 ? "border-emerald-200 bg-emerald-50 text-emerald-700"
-                : "border-neutral-200 bg-neutral-50 text-neutral-700"
+                : "border-border bg-muted text-foreground"
             }`}
           >
             <Truck className="size-3.5" aria-hidden="true" />
@@ -94,7 +94,7 @@ export default function OrderCard({ order }: OrderCardProps) {
       </div>
 
       {cartItems.length > 0 && (
-        <ul className="divide-y divide-neutral-100 py-2">
+        <ul className="divide-y divide-border py-2">
           {cartItems.map((item) => {
             const product = item.product;
             const productId = product?._id || product?.id;
@@ -104,7 +104,7 @@ export default function OrderCard({ order }: OrderCardProps) {
 
             return (
               <li key={item._id} className="flex items-center gap-4 py-3">
-                <div className="relative size-16 shrink-0 overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50">
+                <div className="relative size-16 shrink-0 overflow-hidden rounded-xl border border-border bg-muted">
                   {product?.imageCover ? (
                     <Image
                       src={product.imageCover}
@@ -148,7 +148,7 @@ export default function OrderCard({ order }: OrderCardProps) {
         </ul>
       )}
 
-      <div className="mt-2 flex flex-col gap-4 border-t border-neutral-200 pt-4 sm:flex-row sm:items-end sm:justify-between">
+      <div className="mt-2 flex flex-col gap-4 border-t border-border pt-4 sm:flex-row sm:items-end sm:justify-between">
         {address ? (
           <div className="space-y-1 text-xs text-muted-foreground">
             <p className="font-semibold uppercase tracking-wider text-foreground">

@@ -29,7 +29,7 @@ export default function WishlistItemCard({
   };
 
   return (
-    <article className="flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200 bg-card transition-shadow hover:shadow-xs h-full">
+    <article className="flex flex-col justify-between overflow-hidden rounded-2xl border border-border bg-card transition-shadow hover:shadow-xs h-full">
       <div className="flex flex-col flex-1">
         <Link
           href={`/products/${encodeURIComponent(product._id)}`}
@@ -106,7 +106,7 @@ export default function WishlistItemCard({
           onClick={handleRemove}
           disabled={isRemoving}
           aria-label={`Remove ${product.title} from wishlist`}
-          className="w-full flex items-center justify-center gap-2 rounded-xl border border-neutral-200 py-2 text-xs font-medium text-neutral-600 hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full flex items-center justify-center gap-2 rounded-xl border border-border py-2 text-xs font-medium text-muted-foreground hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isRemoving ? (
             <>

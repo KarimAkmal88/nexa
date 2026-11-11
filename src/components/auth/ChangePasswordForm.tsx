@@ -76,13 +76,13 @@ export function ChangePasswordForm() {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto p-6 sm:p-8 bg-card rounded-xl border border-neutral-200 shadow-xs">
+    <div className="w-full max-w-md mx-auto p-6 sm:p-8 bg-card rounded-xl border border-border shadow-xs">
       <div className="mb-6 text-center">
         <div className="mx-auto size-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
           <Lock className="size-6 text-primary" />
         </div>
-        <h1 className="text-2xl font-bold tracking-tight text-neutral-900">Change Password</h1>
-        <p className="mt-2 text-sm text-neutral-600">
+        <h1 className="text-2xl font-bold tracking-tight text-primary">Change Password</h1>
+        <p className="mt-2 text-sm text-muted-foreground">
           Update your account password for enhanced security
         </p>
       </div>
@@ -110,7 +110,7 @@ export function ChangePasswordForm() {
         <div>
           <label
             htmlFor="currentPassword"
-            className="block text-sm font-medium text-neutral-700 mb-1.5"
+            className="block text-sm font-medium text-foreground mb-1.5"
           >
             Current Password
           </label>
@@ -132,7 +132,7 @@ export function ChangePasswordForm() {
               onClick={() => setShowCurrent((prev) => !prev)}
               aria-label={showCurrent ? "Hide current password" : "Show current password"}
               aria-pressed={showCurrent}
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-neutral-500 hover:text-neutral-800 rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary"
+              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-muted-foreground hover:text-foreground rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary"
             >
               {showCurrent ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
             </button>
@@ -147,7 +147,7 @@ export function ChangePasswordForm() {
         <div>
           <label
             htmlFor="password"
-            className="block text-sm font-medium text-neutral-700 mb-1.5"
+            className="block text-sm font-medium text-foreground mb-1.5"
           >
             New Password
           </label>
@@ -167,12 +167,12 @@ export function ChangePasswordForm() {
               onClick={() => setShowNew((prev) => !prev)}
               aria-label={showNew ? "Hide new password" : "Show new password"}
               aria-pressed={showNew}
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-neutral-500 hover:text-neutral-800 rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary"
+              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-muted-foreground hover:text-foreground rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary"
             >
               {showNew ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
             </button>
           </div>
-          <p id="new-password-hint" className="mt-1 text-xs text-neutral-500">
+          <p id="new-password-hint" className="mt-1 text-xs text-muted-foreground">
             Must be at least 8 characters with uppercase, lowercase, number, and special character.
           </p>
           {errors.password && (
@@ -185,7 +185,7 @@ export function ChangePasswordForm() {
         <div>
           <label
             htmlFor="rePassword"
-            className="block text-sm font-medium text-neutral-700 mb-1.5"
+            className="block text-sm font-medium text-foreground mb-1.5"
           >
             Confirm New Password
           </label>
@@ -205,7 +205,7 @@ export function ChangePasswordForm() {
               onClick={() => setShowConfirm((prev) => !prev)}
               aria-label={showConfirm ? "Hide confirm new password" : "Show confirm new password"}
               aria-pressed={showConfirm}
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-neutral-500 hover:text-neutral-800 rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary"
+              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-muted-foreground hover:text-foreground rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary"
             >
               {showConfirm ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
             </button>

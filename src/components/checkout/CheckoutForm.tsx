@@ -141,7 +141,7 @@ export default function CheckoutForm({
     <form
       onSubmit={handleSubmit(onSubmit)}
       noValidate
-      className="flex flex-col gap-8 rounded-2xl border border-neutral-200 bg-card p-6 sm:p-8 shadow-xs"
+      className="flex flex-col gap-8 rounded-2xl border border-border bg-card p-6 sm:p-8 shadow-xs"
     >
       <div>
         <h2 className="text-xl font-bold tracking-tight text-primary">
@@ -269,7 +269,7 @@ export default function CheckoutForm({
         </div>
       </div>
 
-      <div className="border-t border-neutral-200 pt-6">
+      <div className="border-t border-border pt-6">
         <h3 className="text-base font-bold text-primary mb-1">
           Payment Method
         </h3>
@@ -283,7 +283,7 @@ export default function CheckoutForm({
             className={`relative flex flex-col p-4 rounded-xl border-2 cursor-pointer transition-all has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-primary ${
               paymentMethod === "cash"
                 ? "border-primary bg-primary/5 shadow-xs"
-                : "border-neutral-200 hover:border-neutral-300 bg-card"
+                : "border-border hover:border-primary/40 bg-card"
             } ${isSubmitting || isRedirecting ? "opacity-60 cursor-not-allowed" : ""}`}
           >
             <input
@@ -305,7 +305,7 @@ export default function CheckoutForm({
                   className={`flex size-9 items-center justify-center rounded-lg ${
                     paymentMethod === "cash"
                       ? "bg-primary text-primary-foreground"
-                      : "bg-neutral-100 text-neutral-600"
+                      : "bg-muted text-muted-foreground"
                   }`}
                 >
                   <Banknote className="size-5" aria-hidden="true" />
@@ -328,7 +328,7 @@ export default function CheckoutForm({
             className={`relative flex flex-col p-4 rounded-xl border-2 cursor-pointer transition-all has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-primary ${
               paymentMethod === "online"
                 ? "border-primary bg-primary/5 shadow-xs"
-                : "border-neutral-200 hover:border-neutral-300 bg-card"
+                : "border-border hover:border-primary/40 bg-card"
             } ${isSubmitting || isRedirecting ? "opacity-60 cursor-not-allowed" : ""}`}
           >
             <input
@@ -350,7 +350,7 @@ export default function CheckoutForm({
                   className={`flex size-9 items-center justify-center rounded-lg ${
                     paymentMethod === "online"
                       ? "bg-primary text-primary-foreground"
-                      : "bg-neutral-100 text-neutral-600"
+                      : "bg-muted text-muted-foreground"
                   }`}
                 >
                   <CreditCard className="size-5" aria-hidden="true" />
@@ -376,7 +376,7 @@ export default function CheckoutForm({
         )}
       </div>
 
-      <div className="border-t border-neutral-200 pt-6">
+      <div className="border-t border-border pt-6">
         <Button
           type="submit"
           disabled={isSubmitting || isRedirecting}

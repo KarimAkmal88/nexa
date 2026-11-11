@@ -29,7 +29,7 @@ export default function CartSummary({ currency = "EGP" }: CartSummaryProps) {
   return (
     <aside
       aria-label="Order summary"
-      className="flex flex-col gap-6 rounded-2xl border border-neutral-200 bg-card p-6 shadow-xs"
+      className="flex flex-col gap-6 rounded-2xl border border-border bg-card p-6 shadow-xs"
     >
       <h2 className="text-xl font-bold tracking-tight text-primary">Order Summary</h2>
 
@@ -46,7 +46,7 @@ export default function CartSummary({ currency = "EGP" }: CartSummaryProps) {
           <dd className="font-medium text-emerald-600">Calculated at checkout</dd>
         </div>
 
-        <div className="border-t border-neutral-200 pt-3.5 flex items-center justify-between">
+        <div className="border-t border-border pt-3.5 flex items-center justify-between">
           <dt className="text-base font-semibold text-foreground">Total</dt>
           <dd className="text-xl font-bold text-primary">
             {totalCartPrice.toLocaleString()} {currency}
@@ -68,7 +68,7 @@ export default function CartSummary({ currency = "EGP" }: CartSummaryProps) {
           variant="outline"
           onClick={handleClearCart}
           disabled={isClearing || isMutating || numOfCartItems === 0}
-          className="w-full rounded-full border-neutral-200 text-muted-foreground hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition-colors"
+          className="w-full rounded-full border-border text-muted-foreground hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition-colors"
         >
           {isClearing ? (
             <>

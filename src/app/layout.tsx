@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <AuthProvider>
           <CartProvider>
             <WishlistProvider>
-              <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-accent focus:px-5 focus:py-3 focus:text-primary">Skip to content</a>
+              <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-primary focus:px-5 focus:py-3 focus:text-primary-foreground">Skip to content</a>
               <Navbar />
               <div id="main-content" tabIndex={-1} className="flex flex-1 flex-col">{children}</div>
               <Footer />

@@ -14,7 +14,7 @@ export default function CartPage() {
   if (status === "unauthenticated") {
     return (
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full flex-1 flex items-center justify-center">
-        <div className="flex flex-col items-center max-w-md text-center p-8 rounded-3xl border border-neutral-200 bg-card shadow-xs">
+        <div className="flex flex-col items-center max-w-md text-center p-8 rounded-3xl border border-border bg-card shadow-xs">
           <div className="mb-5 flex size-16 items-center justify-center rounded-full bg-secondary text-primary">
             <ShoppingBag className="size-8" aria-hidden="true" />
           </div>
@@ -83,7 +83,7 @@ export default function CartPage() {
           </span>
         </nav>
 
-        <div className="flex flex-col items-center max-w-md mx-auto text-center py-16 px-6 rounded-3xl border border-neutral-200 bg-card shadow-xs">
+        <div className="flex flex-col items-center max-w-md mx-auto text-center py-16 px-6 rounded-3xl border border-border bg-card shadow-xs">
           <div className="mb-5 flex size-16 items-center justify-center rounded-full bg-secondary text-primary">
             <ShoppingBag className="size-8" aria-hidden="true" />
           </div>
@@ -154,9 +154,9 @@ export default function CartPage() {
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.7fr)_minmax(320px,1fr)] lg:gap-12 items-start">
         <section
           aria-label="Cart products list"
-          className="rounded-2xl border border-neutral-200 bg-card p-6 shadow-xs"
+          className="rounded-2xl border border-border bg-card p-6 shadow-xs"
         >
-          <ul className="divide-y divide-neutral-200">
+          <ul className="divide-y divide-border">
             {products.map((item) => (
               <CartItemRow key={item._id} item={item} />
             ))}

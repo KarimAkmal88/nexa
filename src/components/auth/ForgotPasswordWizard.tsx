@@ -150,14 +150,14 @@ export function ForgotPasswordWizard() {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto p-6 sm:p-8 bg-card rounded-xl border border-neutral-200 shadow-xs">
+    <div className="w-full max-w-md mx-auto p-6 sm:p-8 bg-card rounded-xl border border-border shadow-xs">
       <div className="mb-6 text-center">
-        <h1 className="text-2xl font-bold tracking-tight text-neutral-900">
+        <h1 className="text-2xl font-bold tracking-tight text-primary">
           {step === 1 && "Reset your password"}
           {step === 2 && "Enter verification code"}
           {step === 3 && "Set new password"}
         </h1>
-        <p className="mt-2 text-sm text-neutral-600">
+        <p className="mt-2 text-sm text-muted-foreground">
           {step === 1 && "Enter your email address and we'll send you a 6-digit reset code."}
           {step === 2 && `We sent a 6-digit code to ${email}.`}
           {step === 3 && "Create a new secure password for your account."}
@@ -192,7 +192,7 @@ export function ForgotPasswordWizard() {
           <div>
             <label
               htmlFor="step1-email"
-              className="block text-sm font-medium text-neutral-700 mb-1.5"
+              className="block text-sm font-medium text-foreground mb-1.5"
             >
               Email address
             </label>
@@ -240,7 +240,7 @@ export function ForgotPasswordWizard() {
           <div>
             <label
               htmlFor="step2-code"
-              className="block text-sm font-medium text-neutral-700 mb-1.5"
+              className="block text-sm font-medium text-foreground mb-1.5"
             >
               6-Digit Reset Code
             </label>
@@ -284,7 +284,7 @@ export function ForgotPasswordWizard() {
               type="button"
               onClick={handleRestart}
               disabled={codeForm.formState.isSubmitting}
-              className="text-xs font-medium text-neutral-500 hover:text-neutral-800 disabled:pointer-events-none disabled:opacity-50"
+              className="text-xs font-medium text-muted-foreground hover:text-foreground disabled:pointer-events-none disabled:opacity-50"
             >
               Didn&apos;t receive code or wrong email? Start over
             </button>
@@ -301,7 +301,7 @@ export function ForgotPasswordWizard() {
           <div>
             <label
               htmlFor="step3-newPassword"
-              className="block text-sm font-medium text-neutral-700 mb-1.5"
+              className="block text-sm font-medium text-foreground mb-1.5"
             >
               New Password
             </label>
@@ -325,12 +325,12 @@ export function ForgotPasswordWizard() {
                 onClick={() => setShowPassword((prev) => !prev)}
                 aria-label={showPassword ? "Hide password" : "Show password"}
                 aria-pressed={showPassword}
-                className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-neutral-500 hover:text-neutral-800 rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary"
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-muted-foreground hover:text-foreground rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary"
               >
                 {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
               </button>
             </div>
-            <p id="step3-password-hint" className="mt-1 text-xs text-neutral-500">
+            <p id="step3-password-hint" className="mt-1 text-xs text-muted-foreground">
               Must be at least 8 characters with uppercase, lowercase, number, and special character.
             </p>
             {resetForm.formState.errors.newPassword && (
@@ -360,7 +360,7 @@ export function ForgotPasswordWizard() {
       <div className="mt-6 text-center">
         <Link
           href="/login"
-          className="inline-flex items-center text-sm font-medium text-neutral-600 hover:text-neutral-900"
+          className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary"
         >
           <ArrowLeft className="size-4 mr-1.5" />
           Back to sign in

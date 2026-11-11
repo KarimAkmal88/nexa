@@ -54,10 +54,10 @@ export function RegisterForm() {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto p-6 sm:p-8 bg-card rounded-xl border border-neutral-200 shadow-xs">
+    <div className="w-full max-w-md mx-auto p-6 sm:p-8 bg-card rounded-xl border border-border shadow-xs">
       <div className="mb-6 text-center">
-        <h1 className="text-2xl font-bold tracking-tight text-neutral-900">Create an account</h1>
-        <p className="mt-2 text-sm text-neutral-600">
+        <h1 className="text-2xl font-bold tracking-tight text-primary">Create an account</h1>
+        <p className="mt-2 text-sm text-muted-foreground">
           Join Nexa to shop modern essentials
         </p>
       </div>
@@ -85,7 +85,7 @@ export function RegisterForm() {
         <div>
           <label
             htmlFor="name"
-            className="block text-sm font-medium text-neutral-700 mb-1.5"
+            className="block text-sm font-medium text-foreground mb-1.5"
           >
             Full Name
           </label>
@@ -108,7 +108,7 @@ export function RegisterForm() {
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-medium text-neutral-700 mb-1.5"
+            className="block text-sm font-medium text-foreground mb-1.5"
           >
             Email address
           </label>
@@ -131,7 +131,7 @@ export function RegisterForm() {
         <div>
           <label
             htmlFor="phone"
-            className="block text-sm font-medium text-neutral-700 mb-1.5"
+            className="block text-sm font-medium text-foreground mb-1.5"
           >
             Phone Number
           </label>
@@ -144,7 +144,7 @@ export function RegisterForm() {
             aria-describedby={errors.phone ? "phone-error" : "phone-hint"}
             {...register("phone")}
           />
-          <p id="phone-hint" className="mt-1 text-xs text-neutral-500">
+          <p id="phone-hint" className="mt-1 text-xs text-muted-foreground">
             e.g. 01012345678 (Egyptian mobile format)
           </p>
           {errors.phone && (
@@ -157,7 +157,7 @@ export function RegisterForm() {
         <div>
           <label
             htmlFor="password"
-            className="block text-sm font-medium text-neutral-700 mb-1.5"
+            className="block text-sm font-medium text-foreground mb-1.5"
           >
             Password
           </label>
@@ -177,12 +177,12 @@ export function RegisterForm() {
               onClick={() => setShowPassword((prev) => !prev)}
               aria-label={showPassword ? "Hide password" : "Show password"}
               aria-pressed={showPassword}
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-neutral-500 hover:text-neutral-800 rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary"
+              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-muted-foreground hover:text-foreground rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary"
             >
               {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
             </button>
           </div>
-          <p id="password-hint" className="mt-1 text-xs text-neutral-500">
+          <p id="password-hint" className="mt-1 text-xs text-muted-foreground">
             At least 8 characters with uppercase, lowercase, number, and special character.
           </p>
           {errors.password && (
@@ -195,7 +195,7 @@ export function RegisterForm() {
         <div>
           <label
             htmlFor="rePassword"
-            className="block text-sm font-medium text-neutral-700 mb-1.5"
+            className="block text-sm font-medium text-foreground mb-1.5"
           >
             Confirm Password
           </label>
@@ -215,7 +215,7 @@ export function RegisterForm() {
               onClick={() => setShowRePassword((prev) => !prev)}
               aria-label={showRePassword ? "Hide confirm password" : "Show confirm password"}
               aria-pressed={showRePassword}
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-neutral-500 hover:text-neutral-800 rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary"
+              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-muted-foreground hover:text-foreground rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary"
             >
               {showRePassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
             </button>
@@ -243,7 +243,7 @@ export function RegisterForm() {
         </Button>
       </form>
 
-      <div className="mt-6 text-center text-sm text-neutral-600">
+      <div className="mt-6 text-center text-sm text-muted-foreground">
         Already have an account?{" "}
         <Link
           href="/login"

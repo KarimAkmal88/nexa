@@ -30,7 +30,7 @@ export default function ProductGallery({ title, imageCover, images }: ProductGal
                 }
                 {
                     galleryImages.length > 1 && (
-                        <span className="absolute right-4 bottom-4 rounded-full bg-neutral-100 px-2.5 py-0.5 text-xs font-medium text-primary">
+                        <span className="absolute right-4 bottom-4 rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-primary">
                             {selectedIndex + 1} / {galleryImages.length}
                         </span>
                     )
