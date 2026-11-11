@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { useSession, signOut } from "next-auth/react";
-import { Menu, ShoppingBag, X, User, LogOut, KeyRound, ChevronDown, Heart } from "lucide-react";
+import { Menu, ShoppingBag, X, User, LogOut, KeyRound, ChevronDown, Heart, Package } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useWishlist } from "@/contexts/WishlistContext";
 
@@ -221,6 +221,18 @@ function Navigation({ pathname }: { pathname: string }) {
                     </div>
 
                     <Link
+                      href="/allorders"
+                      role="menuitem"
+                      onClick={() => setUserMenuOpen(false)}
+                      className={`flex items-center gap-2 px-3.5 py-2 text-sm hover:bg-secondary transition-colors ${
+                        active("/allorders") ? "bg-secondary font-semibold text-primary" : "text-neutral-700"
+                      }`}
+                    >
+                      <Package className="size-4 text-neutral-500" />
+                      My Orders
+                    </Link>
+
+                    <Link
                       href="/change-password"
                       role="menuitem"
                       onClick={() => setUserMenuOpen(false)}
@@ -333,6 +345,17 @@ function Navigation({ pathname }: { pathname: string }) {
                   {session.user.name || session.user.email}
                 </p>
               </div>
+              <Link
+                href="/allorders"
+                aria-current={active("/allorders") ? "page" : undefined}
+                onClick={() => setMobileOpen(false)}
+                className={`flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium hover:bg-secondary ${
+                  active("/allorders") ? "bg-secondary text-primary" : "text-neutral-700"
+                }`}
+              >
+                <Package className="size-4 text-neutral-500" />
+                My Orders
+              </Link>
               <Link
                 href="/change-password"
                 onClick={() => setMobileOpen(false)}

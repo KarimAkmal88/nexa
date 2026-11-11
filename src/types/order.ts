@@ -80,3 +80,14 @@ export interface OrderErrorPayload {
   message?: string;
   errors?: Record<string, unknown> | Array<{ msg?: string; param?: string }>;
 }
+
+export interface VerifyTokenResponse {
+  message?: string;
+  decoded?: {
+    id?: string;
+    name?: string;
+    role?: string;
+    iat?: number;
+    exp?: number;
+  };
+}

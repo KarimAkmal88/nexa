@@ -10,7 +10,11 @@ export async function proxy(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
 
-  if (pathname.startsWith("/change-password") || pathname.startsWith("/checkout")) {
+  if (
+    pathname.startsWith("/change-password") ||
+    pathname.startsWith("/checkout") ||
+    pathname.startsWith("/allorders")
+  ) {
     if (!token) {
       const loginUrl = new URL("/login", request.url);
       loginUrl.searchParams.set("callbackUrl", pathname);
@@ -37,6 +41,7 @@ export const config = {
   matcher: [
     "/change-password",
     "/checkout",
+    "/allorders",
     "/login",
     "/register",
     "/forgot-password",

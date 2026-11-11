@@ -118,11 +118,17 @@ export default function CheckoutPage() {
 
           <div className="mt-8 flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
             <Link
-              href="/products"
+              href="/allorders"
               className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors shadow-xs"
             >
-              <span>Continue Shopping</span>
+              <span>View My Orders</span>
               <ArrowRight className="size-4" aria-hidden="true" />
+            </Link>
+            <Link
+              href="/products"
+              className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full border border-neutral-200 px-6 py-3.5 text-sm font-semibold text-foreground hover:bg-neutral-50 transition-colors"
+            >
+              <span>Continue Shopping</span>
             </Link>
             <Link
               href="/cart"

@@ -1,8 +1,10 @@
 import type {
   CashOrderResponse,
   CheckoutSessionResponse,
+  OrderData,
   OrderErrorPayload,
   ShippingAddress,
+  VerifyTokenResponse,
 } from "@/types/order";
 
 const API_BASE_URL =
@@ -117,4 +119,44 @@ export async function createOnlineCheckoutSession(
   });
 
   return handleOrderResponse<CheckoutSessionResponse>(response);
+}
+
+export async function getUserOrders(token: string): Promise<OrderData[]> {
+  const headers = getAuthHeaders(token);
+
+  const verifyResponse = await fetch(`${API_BASE_URL}/api/v1/auth/verifyToken`, {
+    method: "GET",
+    headers,
+    cache: "no-store",
+  });
+
+  const verifyData = await handleOrderResponse<VerifyTokenResponse>(verifyResponse);
+  const userId = verifyData?.decoded?.id?.trim();
+
+  if (!userId) {
+    throw new Error("Unable to verify user identity.");
+  }
+
+  const ordersResponse = await fetch(
+    `${API_BASE_URL}/api/v1/orders/user/${encodeURIComponent(userId)}`,
+    {
+      method: "GET",
+      headers,
+      cache: "no-store",
+    }
+  );
+
+  const ordersData = await handleOrderResponse<OrderData[] | { data?: OrderData[] }>(
+    ordersResponse
+  );
+
+  if (Array.isArray(ordersData)) {
+    return ordersData;
+  }
+
+  if (Array.isArray(ordersData?.data)) {
+    return ordersData.data;
+  }
+
+  return [];
 }
