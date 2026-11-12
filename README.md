@@ -10,7 +10,7 @@ Built with Next.js, React, and TypeScript, Nexa provides product browsing, authe
 
 **Deployment:** Vercel
 
-Live URL: _To be added after deployment._
+Live URL: https://nexa-pied-seven.vercel.app
 
 ## Features
 
