@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback, useState } from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { AlertCircle, ArrowLeft, ArrowRight, ChevronRight, Loader2, RefreshCw, ShoppingBag } from "lucide-react";
@@ -10,6 +11,21 @@ import CartSummary from "@/components/cart/CartSummary";
 export default function CartPage() {
   const { status } = useSession();
   const { cart, numOfCartItems, isLoading, error, clearError, refreshCart } = useCart();
+  const [pendingItemIds, setPendingItemIds] = useState<Set<string>>(() => new Set());
+
+  const handlePendingChange = useCallback((productId: string, isPending: boolean) => {
+    setPendingItemIds((prev) => {
+      const hasId = prev.has(productId);
+      if (hasId === isPending) return prev;
+      const next = new Set(prev);
+      if (isPending) {
+        next.add(productId);
+      } else {
+        next.delete(productId);
+      }
+      return next;
+    });
+  }, []);
 
   if (status === "unauthenticated") {
     return (
@@ -158,12 +174,16 @@ export default function CartPage() {
         >
           <ul className="divide-y divide-border">
             {products.map((item) => (
-              <CartItemRow key={item._id} item={item} />
+              <CartItemRow
+                key={item._id}
+                item={item}
+                onPendingChange={handlePendingChange}
+              />
             ))}
           </ul>
         </section>
 
-        <CartSummary />
+        <CartSummary hasPendingUpdates={pendingItemIds.size > 0} />
       </div>
     </main>
   );

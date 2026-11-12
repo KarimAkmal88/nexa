@@ -8,11 +8,18 @@ import { useCart } from "@/contexts/CartContext";
 
 interface CartSummaryProps {
   currency?: string;
+  hasPendingUpdates?: boolean;
 }
 
-export default function CartSummary({ currency = "EGP" }: CartSummaryProps) {
+export default function CartSummary({
+  currency = "EGP",
+  hasPendingUpdates = false,
+}: CartSummaryProps) {
   const { totalCartPrice, numOfCartItems, clearCart, isMutating } = useCart();
   const [isClearing, setIsClearing] = useState(false);
+
+  const isUpdatingCart = hasPendingUpdates || isMutating;
+  const isCheckoutDisabled = isUpdatingCart || numOfCartItems === 0;
 
   const handleClearCart = async () => {
     if (isClearing || isMutating) return;
@@ -55,13 +62,34 @@ export default function CartSummary({ currency = "EGP" }: CartSummaryProps) {
       </dl>
 
       <div className="space-y-3 pt-2">
-        <Link
-          href="/checkout"
-          className="flex w-full min-h-12 items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-xs hover:bg-primary/90 transition-colors"
-        >
-          <span>Proceed to Checkout</span>
-          <ArrowRight className="size-4" aria-hidden="true" />
-        </Link>
+        {isCheckoutDisabled ? (
+          <button
+            type="button"
+            disabled
+            aria-disabled="true"
+            className="flex w-full min-h-12 items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-xs opacity-50 cursor-not-allowed"
+          >
+            {isUpdatingCart ? (
+              <>
+                <Loader2 className="size-4 animate-spin" aria-hidden="true" />
+                <span>Updating Cart...</span>
+              </>
+            ) : (
+              <>
+                <span>Proceed to Checkout</span>
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </>
+            )}
+          </button>
+        ) : (
+          <Link
+            href="/checkout"
+            className="flex w-full min-h-12 items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-xs hover:bg-primary/90 transition-colors"
+          >
+            <span>Proceed to Checkout</span>
+            <ArrowRight className="size-4" aria-hidden="true" />
+          </Link>
+        )}
 
         <Button
           type="button"

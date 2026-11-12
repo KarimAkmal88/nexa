@@ -1,6 +1,15 @@
 "use client";
 
-import React, {
+import {
+  addProductToCart,
+  clearCart as apiClearCart,
+  getUserCart,
+  removeProductFromCart,
+  updateProductCount,
+} from "@/services/cartService";
+import type { CartData, CartResponse } from "@/types/cart";
+import { useSession } from "next-auth/react";
+import {
   createContext,
   useCallback,
   useContext,
@@ -9,15 +18,6 @@ import React, {
   useState,
   type ReactNode,
 } from "react";
-import { useSession } from "next-auth/react";
-import type { CartData, CartResponse } from "@/types/cart";
-import {
-  getUserCart,
-  addProductToCart,
-  updateProductCount,
-  removeProductFromCart,
-  clearCart as apiClearCart,
-} from "@/services/cartService";
 
 export interface CartContextValue {
   cart: CartData | null;

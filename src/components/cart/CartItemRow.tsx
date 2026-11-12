@@ -10,9 +10,14 @@ import { useCart } from "@/contexts/CartContext";
 interface CartItemRowProps {
   item: CartItem;
   currency?: string;
+  onPendingChange?: (productId: string, isPending: boolean) => void;
 }
 
-export default function CartItemRow({ item, currency = "EGP" }: CartItemRowProps) {
+export default function CartItemRow({
+  item,
+  currency = "EGP",
+  onPendingChange,
+}: CartItemRowProps) {
   const { updateQuantity, removeItem, isMutating } = useCart();
 
   const [pendingCount, setPendingCount] = useState<number | null>(null);
@@ -32,8 +37,17 @@ export default function CartItemRow({ item, currency = "EGP" }: CartItemRowProps
   }, []);
 
   const displayCount = pendingCount ?? item.count;
+  const isPendingUpdate = pendingCount !== null || isUpdating;
+
+  useEffect(() => {
+    onPendingChange?.(item.product._id, isPendingUpdate);
+    return () => {
+      onPendingChange?.(item.product._id, false);
+    };
+  }, [item.product._id, isPendingUpdate, onPendingChange]);
 
   const dispatchUpdate = () => {
+    onPendingChange?.(item.product._id, true);
     if (debounceTimerRef.current) {
       clearTimeout(debounceTimerRef.current);
     }

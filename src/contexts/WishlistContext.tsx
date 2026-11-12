@@ -1,6 +1,13 @@
 "use client";
 
-import React, {
+import type { ProductI } from "@/interfaces/product";
+import {
+  addProductToWishlist,
+  getUserWishlist,
+  removeProductFromWishlist,
+} from "@/services/wishlistService";
+import { useSession } from "next-auth/react";
+import {
   createContext,
   useCallback,
   useContext,
@@ -9,13 +16,6 @@ import React, {
   useState,
   type ReactNode,
 } from "react";
-import { useSession } from "next-auth/react";
-import type { ProductI } from "@/interfaces/product";
-import {
-  getUserWishlist,
-  addProductToWishlist,
-  removeProductFromWishlist,
-} from "@/services/wishlistService";
 
 export interface WishlistContextValue {
   wishlistIds: string[];
